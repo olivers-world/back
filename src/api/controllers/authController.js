@@ -1,3 +1,6 @@
+const db = require('../../config/db.js');
+const bcrypt = require("bcrypt");
+
 // Inscription
 exports.register = (req, res) => {
   const { prenom, nom, email, pwd } = req.body;
@@ -33,7 +36,7 @@ exports.register = (req, res) => {
       // Insert new user into database
       const insertUserQuery =
         "INSERT INTO Utilisateurs (Nom, Prenom, Email, MotDePasse) VALUES (?, ?, ?, ?)";
-      db.query(insertUserQuery, [prenom, nom, user, hashedPwd], (err, result) => {
+      db.query(insertUserQuery, [prenom, nom, email, hashedPwd], (err, result) => {
         if (err) throw err;
         res.status(201).json({ message: "User registered successfully" });
       });
