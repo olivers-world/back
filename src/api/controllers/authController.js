@@ -76,7 +76,7 @@ exports.login = (req, res) => {
           { expiresIn: '1h' } // Le token expire après 1 heure
         );
 
-        res.status(200).json({ accessToken, roles: user.Role });
+        res.status(200).json({ accessToken, roles: user.Role, prenom: user.Prenom, nom: user.Nom });
       } else {
         res.status(401).json({ message: "Invalid email or password" });
       }
