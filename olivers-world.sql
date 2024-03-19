@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 11, 2024 at 05:59 PM
+-- Generation Time: Mar 19, 2024 at 01:08 PM
 -- Server version: 11.3.2-MariaDB
--- PHP Version: 8.3.3
+-- PHP Version: 8.3.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -44,6 +44,43 @@ CREATE TABLE `AdditionsPlats` (
   `Plat` varchar(255) NOT NULL,
   `Addition` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Allergies`
+--
+
+CREATE TABLE `Allergies` (
+  `Nom` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `Allergies`
+--
+
+INSERT INTO `Allergies` (`Nom`) VALUES
+('Arachide'),
+('Blé et triticale'),
+('Graines de sésame'),
+('Lait'),
+('Mollusques et crustacés'),
+('Moutarde'),
+('Noix'),
+('Oeuf'),
+('Poissons'),
+('Soja'),
+('Sulfites');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `countPersonneDay`
+-- (See below for the actual view)
+--
+CREATE TABLE `countPersonneDay` (
+`TotalPersonnes` decimal(32,0)
+);
 
 -- --------------------------------------------------------
 
@@ -396,10 +433,27 @@ CREATE TABLE `Reservations` (
   `Utilisateur` varchar(255) NOT NULL,
   `DateHeure` datetime NOT NULL,
   `NbPersonnes` int(11) NOT NULL,
-  `Statut` varchar(255) DEFAULT NULL,
-  `Table` int(11) DEFAULT NULL,
-  `AnnotationService` text DEFAULT NULL
+  `Statut` varchar(255) NOT NULL DEFAULT 'Prise'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `Reservations`
+--
+
+INSERT INTO `Reservations` (`ID`, `Utilisateur`, `DateHeure`, `NbPersonnes`, `Statut`) VALUES
+(1, 'djej@djej.djej', '2024-03-17 20:14:25', 2, 'Prise'),
+(2, 'carlito@carlito.carlito', '2024-03-17 16:21:41', 2, 'Prise'),
+(11, 'jesus@christ.fr', '2024-03-17 20:22:05', 4, 'Prise'),
+(12, 'je.suis@schizophrene.aol', '2024-03-19 21:22:07', 5, 'Prise'),
+(13, 'macfly@macfly.macfly', '2024-03-20 21:22:07', 6, 'Prise'),
+(14, 'macfly@macfly.macfly', '2024-03-17 17:22:07', 6, 'Prise'),
+(15, 'carlito@carlito.carlito', '2024-03-08 12:00:00', 1, 'Prise'),
+(16, 'carlito@carlito.carlito', '2024-03-08 19:20:00', 8, 'Prise'),
+(18, 'carlito@carlito.carlito', '2024-03-11 12:30:00', 1, 'Prise'),
+(21, 'carlito@carlito.carlito', '2024-03-08 12:10:00', 1, 'Prise'),
+(23, 'carlito@carlito.carlito', '2024-03-17 12:10:00', 1, 'Prise'),
+(24, 'carlito@carlito.carlito', '2024-03-08 19:30:00', 5, 'Prise'),
+(25, 'carlito@carlito.carlito', '2024-03-15 12:00:00', 1, 'Prise');
 
 -- --------------------------------------------------------
 
@@ -411,6 +465,29 @@ CREATE TABLE `ReservationsTables` (
   `Reservation` int(11) NOT NULL,
   `Table` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Restrictions`
+--
+
+CREATE TABLE `Restrictions` (
+  `Type` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `Restrictions`
+--
+
+INSERT INTO `Restrictions` (`Type`) VALUES
+('Alcool'),
+('Aliment non Kasher'),
+('Animaux non Halal'),
+('Boeuf'),
+('Fruits de mer'),
+('Mélange lait-viande'),
+('Porc');
 
 -- --------------------------------------------------------
 
@@ -442,6 +519,16 @@ CREATE TABLE `Statuts` (
   `Nom` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `Statuts`
+--
+
+INSERT INTO `Statuts` (`Nom`) VALUES
+('Annulé'),
+('En cours'),
+('Prise'),
+('Terminer');
+
 -- --------------------------------------------------------
 
 --
@@ -467,7 +554,10 @@ INSERT INTO `Tables` (`ID`, `NbCouverts`) VALUES
 (7, 2),
 (8, 3),
 (9, 3),
-(10, 3);
+(10, 3),
+(11, 8),
+(12, 8),
+(13, 5);
 
 -- --------------------------------------------------------
 
@@ -551,7 +641,43 @@ CREATE TABLE `Utilisateurs` (
 --
 
 INSERT INTO `Utilisateurs` (`Nom`, `Prenom`, `Email`, `MotDePasse`, `Role`) VALUES
-('Djej', 'Djej', 'djej@djej.djej', '$2b$10$W0NBggrzZlGko6hBE1Q2te0QoGDt8oig5Rg.jEVPM6y7VSlioajzW', 'Utilisateur');
+('Carlito', 'Carlito', 'carlito@carlito.carlito', '$2b$10$VicTb5Q5Ql7UPhhL285P3usj10M8tj5BtwW0LVdWxfyCt82QivQVO', 'Utilisateur'),
+('Djej', 'Djej', 'djej@djej.djej', '$2b$10$W0NBggrzZlGko6hBE1Q2te0QoGDt8oig5Rg.jEVPM6y7VSlioajzW', 'Administrateur'),
+('Terry', 'Davis', 'je.suis@schizophrene.aol', '$2b$10$LEOYpil6eJtjUfdRNa1Ae.ZNUBNfB.JzprQJSdL94QvEB6VY0CkN6', 'Utilisateur'),
+('Jesus', 'Christ', 'jesus@christ.fr', '$2b$10$6jtLIsz4Bt4nMTXHgeLI5ehCP34sHliBItvViwKrYrSLTnQFmQ/BC', 'Utilisateur'),
+('Mac', 'Fly', 'macfly@macfly.macfly', '$2b$10$AoZGjFosNQVZf4PfEFnL3O.rlD9w9v.8GSx2Ys409GRZOYWO.rLJS', 'Utilisateur'),
+('Zongo', 'Logo', 'Zongolo@logogo.go', '$2b$10$vJ2HKmcbg6EiAk8bdVceO.T2Hqq2jjwe9PlD4xWv2xHnRmzhBGDie', 'Utilisateur');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `UtilisateursAllergies`
+--
+
+CREATE TABLE `UtilisateursAllergies` (
+  `Utilisateur` varchar(255) NOT NULL,
+  `Allergie` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `UtilisateursRestrictions`
+--
+
+CREATE TABLE `UtilisateursRestrictions` (
+  `Utilisateur` varchar(255) NOT NULL,
+  `Restriction` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `countPersonneDay`
+--
+DROP TABLE IF EXISTS `countPersonneDay`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`syn`@`localhost` SQL SECURITY DEFINER VIEW `countPersonneDay`  AS SELECT sum(`Reservations`.`NbPersonnes`) AS `TotalPersonnes` FROM `Reservations` WHERE (`Reservations`.`Statut` = 'Prise' OR `Reservations`.`Statut` = 'En cours') AND `Reservations`.`DateHeure` >= curdate() AND `Reservations`.`DateHeure` < curdate() + interval 1 day ;
 
 --
 -- Indexes for dumped tables
@@ -571,6 +697,12 @@ ALTER TABLE `Additions`
 ALTER TABLE `AdditionsPlats`
   ADD PRIMARY KEY (`Plat`,`Addition`),
   ADD KEY `Addition` (`Addition`);
+
+--
+-- Indexes for table `Allergies`
+--
+ALTER TABLE `Allergies`
+  ADD PRIMARY KEY (`Nom`);
 
 --
 -- Indexes for table `Ingredients`
@@ -611,9 +743,9 @@ ALTER TABLE `PlatsIngredients`
 --
 ALTER TABLE `Reservations`
   ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `DateHeure` (`DateHeure`),
   ADD KEY `Utilisateur` (`Utilisateur`),
-  ADD KEY `Statut` (`Statut`),
-  ADD KEY `Table` (`Table`);
+  ADD KEY `Statut` (`Statut`);
 
 --
 -- Indexes for table `ReservationsTables`
@@ -621,6 +753,12 @@ ALTER TABLE `Reservations`
 ALTER TABLE `ReservationsTables`
   ADD PRIMARY KEY (`Reservation`,`Table`),
   ADD KEY `Table` (`Table`);
+
+--
+-- Indexes for table `Restrictions`
+--
+ALTER TABLE `Restrictions`
+  ADD PRIMARY KEY (`Type`);
 
 --
 -- Indexes for table `Roles`
@@ -660,6 +798,20 @@ ALTER TABLE `Utilisateurs`
   ADD KEY `Role` (`Role`);
 
 --
+-- Indexes for table `UtilisateursAllergies`
+--
+ALTER TABLE `UtilisateursAllergies`
+  ADD PRIMARY KEY (`Utilisateur`,`Allergie`),
+  ADD KEY `Allergie` (`Allergie`);
+
+--
+-- Indexes for table `UtilisateursRestrictions`
+--
+ALTER TABLE `UtilisateursRestrictions`
+  ADD PRIMARY KEY (`Utilisateur`,`Restriction`),
+  ADD KEY `Restriction` (`Restriction`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -673,13 +825,13 @@ ALTER TABLE `Additions`
 -- AUTO_INCREMENT for table `Reservations`
 --
 ALTER TABLE `Reservations`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `Tables`
 --
 ALTER TABLE `Tables`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
@@ -729,8 +881,7 @@ ALTER TABLE `PlatsIngredients`
 --
 ALTER TABLE `Reservations`
   ADD CONSTRAINT `Reservations_ibfk_1` FOREIGN KEY (`Utilisateur`) REFERENCES `Utilisateurs` (`Email`),
-  ADD CONSTRAINT `Reservations_ibfk_2` FOREIGN KEY (`Statut`) REFERENCES `Statuts` (`Nom`),
-  ADD CONSTRAINT `Reservations_ibfk_3` FOREIGN KEY (`Table`) REFERENCES `Tables` (`ID`);
+  ADD CONSTRAINT `Reservations_ibfk_2` FOREIGN KEY (`Statut`) REFERENCES `Statuts` (`Nom`);
 
 --
 -- Constraints for table `ReservationsTables`
@@ -744,6 +895,20 @@ ALTER TABLE `ReservationsTables`
 --
 ALTER TABLE `Utilisateurs`
   ADD CONSTRAINT `Utilisateurs_ibfk_1` FOREIGN KEY (`Role`) REFERENCES `Roles` (`Nom`);
+
+--
+-- Constraints for table `UtilisateursAllergies`
+--
+ALTER TABLE `UtilisateursAllergies`
+  ADD CONSTRAINT `UtilisateursAllergies_ibfk_1` FOREIGN KEY (`Utilisateur`) REFERENCES `Utilisateurs` (`Email`),
+  ADD CONSTRAINT `UtilisateursAllergies_ibfk_2` FOREIGN KEY (`Allergie`) REFERENCES `Allergies` (`Nom`);
+
+--
+-- Constraints for table `UtilisateursRestrictions`
+--
+ALTER TABLE `UtilisateursRestrictions`
+  ADD CONSTRAINT `UtilisateursRestrictions_ibfk_1` FOREIGN KEY (`Utilisateur`) REFERENCES `Utilisateurs` (`Email`),
+  ADD CONSTRAINT `UtilisateursRestrictions_ibfk_2` FOREIGN KEY (`Restriction`) REFERENCES `Restrictions` (`Type`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
