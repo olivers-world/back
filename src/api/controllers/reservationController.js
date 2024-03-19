@@ -3,13 +3,18 @@ const db = require("../../config/db.js");
 
 const maxPeople = 52;
 
+Date.prototype.addHours = function(h) {
+  this.setTime(this.getTime() + (h*60*60*1000));
+  return this;
+}
+
 exports.createReservation = (req, res) => {
   // Ici, vous récupérez les données envoyées avec la requête POST.
   const { date, nbPersonne, user } = req.body;
 
   // Valider les données reçues
   if (!(user && date && nbPersonne)) {
-    return res  
+    return res
       .status(400)
       .json({ message: "User, date, and number of people are required" });
   }
@@ -22,52 +27,47 @@ exports.createReservation = (req, res) => {
     AND (Statut = 'Prise' OR Statut = 'En cours')
   `;
 
-  db.query(
-    checkAvailabilityQuery,
-    [date, date],
-    (err, result) => {
-      if (err) {
-        // Gérer les erreurs de la base de données ici
-        return res.status(500).json({ message: "Database error", error: err });
-      }
-      
-      const totalReserved = result[0].TotalPersonnes || 0;
+  db.query(checkAvailabilityQuery, [date, date], (err, result) => {
+    if (err) {
+      // Gérer les erreurs de la base de données ici
+      return res.status(500).json({ message: "Database error", error: err });
+    }
 
-      if (parseInt(totalReserved, 10) + parseInt(nbPersonne, 10) > maxPeople) {
-        // Si on dépasse la capacité max, on refuse la réservation
-        return res.status(400).json({
-          message:
-            "Pas assez de place",
-        });
-      } else {
-        // Il y a assez de place, on peut insérer la nouvelle réservation
-        const createReservationQuery = `
+    const totalReserved = result[0].TotalPersonnes || 0;
+
+    if (parseInt(totalReserved, 10) + parseInt(nbPersonne, 10) > maxPeople) {
+      // Si on dépasse la capacité max, on refuse la réservation
+      return res.status(400).json({
+        message: "Pas assez de place",
+      });
+    } else {
+      // Il y a assez de place, on peut insérer la nouvelle réservation
+      const createReservationQuery = `
         INSERT INTO Reservations (Utilisateur, DateHeure, NbPersonnes, Statut)
         VALUES (?, ?, ?, 'Prise')
       `;
 
-        // Exécution de la requête SQL pour créer la réservation
-        db.query(
-          createReservationQuery,
-          [user, date, nbPersonne],
-          (err, result) => {
-            if (err) {
-              // Gérer les erreurs de la base de données ici
-              return res
-                .status(500)
-                .json({ message: "Database error", error: err });
-            } else {
-              // Réussite de l'insertion
-              return res.status(201).json({
-                message: "Reservation creer avec succes",
-                reservationId: result.insertId,
-              });
-            }
+      // Exécution de la requête SQL pour créer la réservation
+      db.query(
+        createReservationQuery,
+        [user, date, nbPersonne],
+        (err, result) => {
+          if (err) {
+            // Gérer les erreurs de la base de données ici
+            return res
+              .status(500)
+              .json({ message: "Database error", error: err });
+          } else {
+            // Réussite de l'insertion
+            return res.status(201).json({
+              message: "Reservation creer avec succes",
+              reservationId: result.insertId,
+            });
           }
-        );
-      }
+        }
+      );
     }
-  );
+  });
 };
 
 exports.getReservation = (req, res) => {
@@ -84,12 +84,18 @@ exports.getReservation = (req, res) => {
   const startOfHour = new Date(dateTime.setMinutes(0, 0, 0));
   const endOfHour = new Date(dateTime.setMinutes(59, 59, 999));
 
-  console.log(startOfHour);
-  console.log(endOfHour);
+  // console.log(startOfHour);
+  // console.log(endOfHour);
 
   // Formater pour SQL
-  const startDateFormat = startOfHour.toISOString().slice(0, 19).replace('T', ' ');
-  const endDateFormat = endOfHour.toISOString().slice(0, 19).replace('T', ' ');
+  const startDateFormat = startOfHour
+    .toISOString()
+    .slice(0, 19)
+    .replace("T", " ");
+  const endDateFormat = endOfHour.toISOString().slice(0, 19).replace("T", " ");
+
+  // console.log(startDateFormat);
+  // console.log(endDateFormat);
 
   // Requête SQL pour récupérer les réservations pour l'heure donnée
   const getReservationsQuery = `
@@ -99,13 +105,21 @@ exports.getReservation = (req, res) => {
   `;
 
   // Exécution de la requête SQL pour récupérer les réservations
-  db.query(getReservationsQuery, [startDateFormat, endDateFormat], (err, results) => {
-    if (err) {
-      // Gérer les erreurs de la base de données ici
-      return res.status(500).json({ message: "Database error", error: err });
-    } else {
-      // Réussite de la récupération des données
-      return res.status(200).json(results);
+  db.query(
+    getReservationsQuery,
+    [startDateFormat, endDateFormat],
+    (err, results) => {
+      if (err) {
+        // Gérer les erreurs de la base de données ici
+        return res.status(500).json({ message: "Database error", error: err });
+      } else {
+        // Modifié la réponse de la bdd en lui rajoutant +1 heure car horraire décalé
+        results.forEach(function (result) {
+          result.DateHeure = new Date(result.DateHeure).addHours(1);
+          console.log(result.DateHeure);
+        });
+        return res.status(200).json(results);
+      }
     }
-  });
+  );
 };
