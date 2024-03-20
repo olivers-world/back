@@ -1,9 +1,7 @@
 require("dotenv").config();
 const db = require("../../config/db.js");
 const bcrypt = require("bcrypt");
-
-const jwt = require('jsonwebtoken');
-const secretKey = process.env.JWT_TOKEN;
+const jwt = require("jsonwebtoken");
 
 // Inscription
 exports.register = (req, res) => {
@@ -72,11 +70,43 @@ exports.login = (req, res) => {
         // Ici, vous générez le token d'accès. Vous pouvez aussi inclure d'autres données utilisateur selon les besoins.
         const accessToken = jwt.sign(
           { userId: user.Id, email: user.Email, roles: user.Role }, // Assurez-vous que les rôles sont stockés dans votre DB et récupérés correctement
-          secretKey,
-          { expiresIn: '1h' } // Le token expire après 1 heure
+          process.env.ACCESS_TOKEN_SECRET,
+          { expiresIn: "10s" } // Le token expire après 1 heure
         );
 
-        res.status(200).json({ accessToken, roles: user.Role, prenom: user.Prenom, nom: user.Nom });
+        const refreshToken = jwt.sign(
+          { userId: user.Id, email: user.Email, roles: user.Role },
+          process.env.REFRESH_TOKEN_SECRET,
+          { expiresIn: "7d" } // Le refreshToken expire après 7 jours, par exemple
+        );
+
+        const updateRefreshTokenQuery =
+          "UPDATE Utilisateurs SET refreshToken = ? WHERE Email = ?";
+        db.query(
+          updateRefreshTokenQuery,
+          [refreshToken, user.Email],
+          (err, result) => {
+            if (err) {
+              console.error(err);
+              return res.sendStatus(500); // Internal Server Error
+            }
+
+            // Envoyez le refreshToken au client sous forme de cookie HttpOnly
+            res.cookie("jwt", refreshToken, {
+              httpOnly: true,
+              secure: true,
+              sameSite: "None",
+              maxAge: 24 * 60 * 60 * 1000,
+            }); // 1 jour en millisecondes
+
+            res.status(200).json({
+              accessToken,
+              roles: user.Role,
+              prenom: user.Prenom,
+              nom: user.Nom,
+            });
+          }
+        );
       } else {
         res.status(401).json({ message: "Invalid email or password" });
       }
