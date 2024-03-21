@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Mar 19, 2024 at 01:08 PM
--- Server version: 11.3.2-MariaDB
--- PHP Version: 8.3.4
+-- Hôte : localhost
+-- Généré le : jeu. 21 mars 2024 à 09:55
+-- Version du serveur : 10.4.28-MariaDB
+-- Version de PHP : 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `olivers-world`
+-- Base de données : `olivers-world`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Additions`
+-- Structure de la table `Additions`
 --
 
 CREATE TABLE `Additions` (
@@ -37,7 +37,7 @@ CREATE TABLE `Additions` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `AdditionsPlats`
+-- Structure de la table `AdditionsPlats`
 --
 
 CREATE TABLE `AdditionsPlats` (
@@ -48,7 +48,7 @@ CREATE TABLE `AdditionsPlats` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Allergies`
+-- Structure de la table `Allergies`
 --
 
 CREATE TABLE `Allergies` (
@@ -56,7 +56,7 @@ CREATE TABLE `Allergies` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `Allergies`
+-- Déchargement des données de la table `Allergies`
 --
 
 INSERT INTO `Allergies` (`Nom`) VALUES
@@ -75,17 +75,17 @@ INSERT INTO `Allergies` (`Nom`) VALUES
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `countPersonneDay`
--- (See below for the actual view)
+-- Doublure de structure pour la vue `countpersonneday`
+-- (Voir ci-dessous la vue réelle)
 --
-CREATE TABLE `countPersonneDay` (
+CREATE TABLE `countpersonneday` (
 `TotalPersonnes` decimal(32,0)
 );
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Ingredients`
+-- Structure de la table `Ingredients`
 --
 
 CREATE TABLE `Ingredients` (
@@ -94,7 +94,7 @@ CREATE TABLE `Ingredients` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `Ingredients`
+-- Déchargement des données de la table `Ingredients`
 --
 
 INSERT INTO `Ingredients` (`Nom`, `Type`) VALUES
@@ -214,7 +214,7 @@ INSERT INTO `Ingredients` (`Nom`, `Type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Menus`
+-- Structure de la table `Menus`
 --
 
 CREATE TABLE `Menus` (
@@ -223,7 +223,7 @@ CREATE TABLE `Menus` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `Menus`
+-- Déchargement des données de la table `Menus`
 --
 
 INSERT INTO `Menus` (`Menu`, `Prix`) VALUES
@@ -234,7 +234,7 @@ INSERT INTO `Menus` (`Menu`, `Prix`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `MenusPlats`
+-- Structure de la table `MenusPlats`
 --
 
 CREATE TABLE `MenusPlats` (
@@ -243,31 +243,31 @@ CREATE TABLE `MenusPlats` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `MenusPlats`
+-- Déchargement des données de la table `MenusPlats`
 --
 
 INSERT INTO `MenusPlats` (`Menu`, `Plat`) VALUES
 ('Classiques du Bistrot', 'Boeuf Bourguignon'),
-('Voyage en Mer', 'Bouillabaisse'),
 ('Classiques du Bistrot', 'Cassoulet'),
-('Voyage en Mer', 'Ceviche'),
 ('Classiques du Bistrot', 'Crème Brûlée'),
-('Végétarien Gourmand', 'Falafel Wrap'),
-('Végétarien Gourmand', 'Gazpacho'),
-('Voyage en Mer', 'Moules Marinières'),
 ('Classiques du Bistrot', 'Quiche Lorraine'),
 ('Classiques du Bistrot', 'Ratatouille'),
+('Classiques du Bistrot', 'Sangria'),
+('Végétarien Gourmand', 'Falafel Wrap'),
+('Végétarien Gourmand', 'Gazpacho'),
 ('Végétarien Gourmand', 'Ratatouille'),
 ('Végétarien Gourmand', 'Salade de Quinoa'),
 ('Végétarien Gourmand', 'Salade Niçoise'),
-('Classiques du Bistrot', 'Sangria'),
-('Voyage en Mer', 'Tarte Tatin'),
-('Végétarien Gourmand', 'Tiramisu');
+('Végétarien Gourmand', 'Tiramisu'),
+('Voyage en Mer', 'Bouillabaisse'),
+('Voyage en Mer', 'Ceviche'),
+('Voyage en Mer', 'Moules Marinières'),
+('Voyage en Mer', 'Tarte Tatin');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Plats`
+-- Structure de la table `Plats`
 --
 
 CREATE TABLE `Plats` (
@@ -277,7 +277,7 @@ CREATE TABLE `Plats` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `Plats`
+-- Déchargement des données de la table `Plats`
 --
 
 INSERT INTO `Plats` (`Nom`, `Prix`, `Types`) VALUES
@@ -305,7 +305,7 @@ INSERT INTO `Plats` (`Nom`, `Prix`, `Types`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `PlatsIngredients`
+-- Structure de la table `PlatsIngredients`
 --
 
 CREATE TABLE `PlatsIngredients` (
@@ -314,118 +314,118 @@ CREATE TABLE `PlatsIngredients` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `PlatsIngredients`
+-- Déchargement des données de la table `PlatsIngredients`
 --
 
 INSERT INTO `PlatsIngredients` (`Plat`, `Ingredients`) VALUES
-('Bouillabaisse', 'Ail'),
-('Cassoulet', 'Ail'),
-('Gazpacho', 'Ail'),
-('Salade Niçoise', 'Anchois'),
-('Ratatouille', 'Aubergines'),
-('Margherita Pizza', 'Basilic'),
-('Moules Marinières', 'Beurre'),
-('Tarte Tatin', 'Beurre'),
 ('Boeuf Bourguignon', 'Boeuf'),
-('Risotto aux Champignons', 'Bouillon de légumes'),
-('Sangria', 'Brandy'),
-('Tiramisu', 'Cacao'),
-('Tiramisu', 'Café'),
-('Cassoulet', 'Canard'),
 ('Boeuf Bourguignon', 'Carottes'),
 ('Boeuf Bourguignon', 'Champignons'),
-('Risotto aux Champignons', 'Champignons'),
-('Salade de Quinoa', 'Citron'),
-('Gazpacho', 'Concombre'),
-('Salade de Quinoa', 'Concombre'),
-('Ratatouille', 'Courgettes'),
-('Crème Brûlée', 'Crème'),
-('Quiche Lorraine', 'Crème'),
+('Boeuf Bourguignon', 'Oignons'),
+('Boeuf Bourguignon', 'Vin rouge'),
+('Bouillabaisse', 'Ail'),
 ('Bouillabaisse', 'Crevettes'),
-('Paella', 'Crevettes'),
 ('Bouillabaisse', 'Dorade'),
-('Moules Marinières', 'Échalotes'),
-('Ravioli Ricotta e Spinaci', 'Épinards'),
-('Falafel Wrap', 'Falafels'),
-('Margherita Pizza', 'Farine'),
-('Salade de Quinoa', 'Feta'),
-('Quiche Lorraine', 'Fromage de chèvre'),
-('Sangria', 'Fruits variés'),
-('Cassoulet', 'Haricots'),
-('Salade Niçoise', 'Haricots'),
-('Gazpacho', 'Huile d\'olive'),
-('Ratatouille', 'Huile d\'olive'),
-('Crème Brûlée', 'Jaunes d\'oeufs'),
 ('Bouillabaisse', 'La Baudroie'),
 ('Bouillabaisse', 'La Vive'),
-('Falafel Wrap', 'Laitue'),
-('Quiche Lorraine', 'Lardons'),
 ('Bouillabaisse', 'Laurier'),
-('Cassoulet', 'Laurier'),
-('Tiramisu', 'Mascarpone'),
 ('Bouillabaisse', 'Merlan'),
 ('Bouillabaisse', 'Moules'),
-('Moules Marinières', 'Moules'),
-('Paella', 'Moules'),
-('Margherita Pizza', 'Mozzarella'),
-('Quiche Lorraine', 'Oeufs'),
-('Salade Niçoise', 'Oeufs'),
-('Spaghetti Carbonara', 'Oeufs'),
-('Tiramisu', 'Oeufs'),
-('Boeuf Bourguignon', 'Oignons'),
-('Cassoulet', 'Oignons'),
-('Ratatouille', 'Oignons'),
-('Salade Niçoise', 'Olives'),
-('Falafel Wrap', 'Pain pita'),
-('Spaghetti Carbonara', 'Pancetta'),
-('Risotto aux Champignons', 'Parmesan'),
-('Spaghetti Carbonara', 'Parmesan'),
-('Tarte Tatin', 'Pâte feuilletée'),
-('Quiche Lorraine', 'Pâtes'),
-('Spaghetti Carbonara', 'Pâtes'),
-('Moules Marinières', 'Persil'),
-('Spaghetti Carbonara', 'Poivre'),
-('Gazpacho', 'Poivrons'),
-('Paella', 'Poivrons'),
-('Ratatouille', 'Poivrons'),
-('Salade de Quinoa', 'Poivrons'),
-('Tarte Tatin', 'Pommes'),
 ('Bouillabaisse', 'Pommes de terre'),
-('Paella', 'Poulet'),
-('Salade de Quinoa', 'Quinoa'),
 ('Bouillabaisse', 'Rascasse Rouge'),
+('Bouillabaisse', 'Rouget Barbet'),
+('Cassoulet', 'Ail'),
+('Cassoulet', 'Canard'),
+('Cassoulet', 'Haricots'),
+('Cassoulet', 'Laurier'),
+('Cassoulet', 'Oignons'),
+('Cassoulet', 'Saucisse'),
+('Crème Brûlée', 'Crème'),
+('Crème Brûlée', 'Jaunes d\'oeufs'),
+('Crème Brûlée', 'Sucre'),
+('Crème Brûlée', 'Vanille'),
+('Falafel Wrap', 'Falafels'),
+('Falafel Wrap', 'Laitue'),
+('Falafel Wrap', 'Pain pita'),
+('Falafel Wrap', 'Sauce tahini'),
+('Falafel Wrap', 'Tomates'),
+('Gazpacho', 'Ail'),
+('Gazpacho', 'Concombre'),
+('Gazpacho', 'Huile d\'olive'),
+('Gazpacho', 'Poivrons'),
+('Gazpacho', 'Tomates'),
+('Gazpacho', 'Vinaigre'),
+('Margherita Pizza', 'Basilic'),
+('Margherita Pizza', 'Farine'),
+('Margherita Pizza', 'Mozzarella'),
+('Margherita Pizza', 'Tomates'),
+('Moules Marinières', 'Beurre'),
+('Moules Marinières', 'Échalotes'),
+('Moules Marinières', 'Moules'),
+('Moules Marinières', 'Persil'),
+('Moules Marinières', 'Vin blanc'),
+('Paella', 'Crevettes'),
+('Paella', 'Moules'),
+('Paella', 'Poivrons'),
+('Paella', 'Poulet'),
+('Paella', 'Riz'),
+('Paella', 'Safran'),
+('Quiche Lorraine', 'Crème'),
+('Quiche Lorraine', 'Fromage de chèvre'),
+('Quiche Lorraine', 'Lardons'),
+('Quiche Lorraine', 'Oeufs'),
+('Quiche Lorraine', 'Pâtes'),
+('Ratatouille', 'Aubergines'),
+('Ratatouille', 'Courgettes'),
+('Ratatouille', 'Huile d\'olive'),
+('Ratatouille', 'Oignons'),
+('Ratatouille', 'Poivrons'),
+('Ratatouille', 'Tomates'),
+('Ravioli Ricotta e Spinaci', 'Épinards'),
 ('Ravioli Ricotta e Spinaci', 'Ravioli'),
 ('Ravioli Ricotta e Spinaci', 'Ricotta'),
-('Paella', 'Riz'),
-('Risotto aux Champignons', 'Riz arborio'),
-('Bouillabaisse', 'Rouget Barbet'),
-('Paella', 'Safran'),
-('Falafel Wrap', 'Sauce tahini'),
 ('Ravioli Ricotta e Spinaci', 'Sauce tomate'),
-('Cassoulet', 'Saucisse'),
-('Sangria', 'Soda'),
-('Crème Brûlée', 'Sucre'),
-('Tarte Tatin', 'Sucre'),
-('Tiramisu', 'Sucre'),
-('Sangria', 'Sucres'),
-('Salade Niçoise', 'Thon'),
-('Falafel Wrap', 'Tomates'),
-('Gazpacho', 'Tomates'),
-('Margherita Pizza', 'Tomates'),
-('Ratatouille', 'Tomates'),
-('Salade de Quinoa', 'Tomates'),
-('Salade Niçoise', 'Tomates'),
-('Crème Brûlée', 'Vanille'),
-('Moules Marinières', 'Vin blanc'),
+('Risotto aux Champignons', 'Bouillon de légumes'),
+('Risotto aux Champignons', 'Champignons'),
+('Risotto aux Champignons', 'Parmesan'),
+('Risotto aux Champignons', 'Riz arborio'),
 ('Risotto aux Champignons', 'Vin blanc'),
-('Boeuf Bourguignon', 'Vin rouge'),
+('Salade de Quinoa', 'Citron'),
+('Salade de Quinoa', 'Concombre'),
+('Salade de Quinoa', 'Feta'),
+('Salade de Quinoa', 'Poivrons'),
+('Salade de Quinoa', 'Quinoa'),
+('Salade de Quinoa', 'Tomates'),
+('Salade Niçoise', 'Anchois'),
+('Salade Niçoise', 'Haricots'),
+('Salade Niçoise', 'Oeufs'),
+('Salade Niçoise', 'Olives'),
+('Salade Niçoise', 'Thon'),
+('Salade Niçoise', 'Tomates'),
+('Sangria', 'Brandy'),
+('Sangria', 'Fruits variés'),
+('Sangria', 'Soda'),
+('Sangria', 'Sucres'),
 ('Sangria', 'Vin rouge'),
-('Gazpacho', 'Vinaigre');
+('Spaghetti Carbonara', 'Oeufs'),
+('Spaghetti Carbonara', 'Pancetta'),
+('Spaghetti Carbonara', 'Parmesan'),
+('Spaghetti Carbonara', 'Pâtes'),
+('Spaghetti Carbonara', 'Poivre'),
+('Tarte Tatin', 'Beurre'),
+('Tarte Tatin', 'Pâte feuilletée'),
+('Tarte Tatin', 'Pommes'),
+('Tarte Tatin', 'Sucre'),
+('Tiramisu', 'Cacao'),
+('Tiramisu', 'Café'),
+('Tiramisu', 'Mascarpone'),
+('Tiramisu', 'Oeufs'),
+('Tiramisu', 'Sucre');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Reservations`
+-- Structure de la table `Reservations`
 --
 
 CREATE TABLE `Reservations` (
@@ -437,7 +437,7 @@ CREATE TABLE `Reservations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `Reservations`
+-- Déchargement des données de la table `Reservations`
 --
 
 INSERT INTO `Reservations` (`ID`, `Utilisateur`, `DateHeure`, `NbPersonnes`, `Statut`) VALUES
@@ -458,7 +458,7 @@ INSERT INTO `Reservations` (`ID`, `Utilisateur`, `DateHeure`, `NbPersonnes`, `St
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ReservationsTables`
+-- Structure de la table `ReservationsTables`
 --
 
 CREATE TABLE `ReservationsTables` (
@@ -469,7 +469,7 @@ CREATE TABLE `ReservationsTables` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Restrictions`
+-- Structure de la table `Restrictions`
 --
 
 CREATE TABLE `Restrictions` (
@@ -477,7 +477,7 @@ CREATE TABLE `Restrictions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `Restrictions`
+-- Déchargement des données de la table `Restrictions`
 --
 
 INSERT INTO `Restrictions` (`Type`) VALUES
@@ -492,7 +492,7 @@ INSERT INTO `Restrictions` (`Type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Roles`
+-- Structure de la table `Roles`
 --
 
 CREATE TABLE `Roles` (
@@ -501,7 +501,7 @@ CREATE TABLE `Roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `Roles`
+-- Déchargement des données de la table `Roles`
 --
 
 INSERT INTO `Roles` (`Nom`, `Permissions`) VALUES
@@ -512,7 +512,7 @@ INSERT INTO `Roles` (`Nom`, `Permissions`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Statuts`
+-- Structure de la table `Statuts`
 --
 
 CREATE TABLE `Statuts` (
@@ -520,7 +520,7 @@ CREATE TABLE `Statuts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `Statuts`
+-- Déchargement des données de la table `Statuts`
 --
 
 INSERT INTO `Statuts` (`Nom`) VALUES
@@ -532,7 +532,7 @@ INSERT INTO `Statuts` (`Nom`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Tables`
+-- Structure de la table `Tables`
 --
 
 CREATE TABLE `Tables` (
@@ -541,7 +541,7 @@ CREATE TABLE `Tables` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `Tables`
+-- Déchargement des données de la table `Tables`
 --
 
 INSERT INTO `Tables` (`ID`, `NbCouverts`) VALUES
@@ -562,7 +562,7 @@ INSERT INTO `Tables` (`ID`, `NbCouverts`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `TypeIngredients`
+-- Structure de la table `TypeIngredients`
 --
 
 CREATE TABLE `TypeIngredients` (
@@ -570,7 +570,7 @@ CREATE TABLE `TypeIngredients` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `TypeIngredients`
+-- Déchargement des données de la table `TypeIngredients`
 --
 
 INSERT INTO `TypeIngredients` (`Nom`) VALUES
@@ -594,7 +594,7 @@ INSERT INTO `TypeIngredients` (`Nom`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `TypesPlats`
+-- Structure de la table `TypesPlats`
 --
 
 CREATE TABLE `TypesPlats` (
@@ -602,7 +602,7 @@ CREATE TABLE `TypesPlats` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `TypesPlats`
+-- Déchargement des données de la table `TypesPlats`
 --
 
 INSERT INTO `TypesPlats` (`Nom`) VALUES
@@ -625,7 +625,7 @@ INSERT INTO `TypesPlats` (`Nom`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Utilisateurs`
+-- Structure de la table `Utilisateurs`
 --
 
 CREATE TABLE `Utilisateurs` (
@@ -633,25 +633,26 @@ CREATE TABLE `Utilisateurs` (
   `Prenom` varchar(255) NOT NULL,
   `Email` varchar(255) NOT NULL,
   `MotDePasse` varchar(255) NOT NULL,
-  `Role` varchar(255) DEFAULT NULL
+  `Role` varchar(255) DEFAULT NULL,
+  `refreshToken` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `Utilisateurs`
+-- Déchargement des données de la table `Utilisateurs`
 --
 
-INSERT INTO `Utilisateurs` (`Nom`, `Prenom`, `Email`, `MotDePasse`, `Role`) VALUES
-('Carlito', 'Carlito', 'carlito@carlito.carlito', '$2b$10$VicTb5Q5Ql7UPhhL285P3usj10M8tj5BtwW0LVdWxfyCt82QivQVO', 'Utilisateur'),
-('Djej', 'Djej', 'djej@djej.djej', '$2b$10$W0NBggrzZlGko6hBE1Q2te0QoGDt8oig5Rg.jEVPM6y7VSlioajzW', 'Administrateur'),
-('Terry', 'Davis', 'je.suis@schizophrene.aol', '$2b$10$LEOYpil6eJtjUfdRNa1Ae.ZNUBNfB.JzprQJSdL94QvEB6VY0CkN6', 'Utilisateur'),
-('Jesus', 'Christ', 'jesus@christ.fr', '$2b$10$6jtLIsz4Bt4nMTXHgeLI5ehCP34sHliBItvViwKrYrSLTnQFmQ/BC', 'Utilisateur'),
-('Mac', 'Fly', 'macfly@macfly.macfly', '$2b$10$AoZGjFosNQVZf4PfEFnL3O.rlD9w9v.8GSx2Ys409GRZOYWO.rLJS', 'Utilisateur'),
-('Zongo', 'Logo', 'Zongolo@logogo.go', '$2b$10$vJ2HKmcbg6EiAk8bdVceO.T2Hqq2jjwe9PlD4xWv2xHnRmzhBGDie', 'Utilisateur');
+INSERT INTO `Utilisateurs` (`Nom`, `Prenom`, `Email`, `MotDePasse`, `Role`, `refreshToken`) VALUES
+('Carlito', 'Carlito', 'carlito@carlito.carlito', '$2b$10$VicTb5Q5Ql7UPhhL285P3usj10M8tj5BtwW0LVdWxfyCt82QivQVO', 'Utilisateur', ''),
+('Djej', 'Djej', 'djej@djej.djej', '$2b$10$W0NBggrzZlGko6hBE1Q2te0QoGDt8oig5Rg.jEVPM6y7VSlioajzW', 'Administrateur', ''),
+('Terry', 'Davis', 'je.suis@schizophrene.aol', '$2b$10$LEOYpil6eJtjUfdRNa1Ae.ZNUBNfB.JzprQJSdL94QvEB6VY0CkN6', 'Utilisateur', ''),
+('Jesus', 'Christ', 'jesus@christ.fr', '$2b$10$6jtLIsz4Bt4nMTXHgeLI5ehCP34sHliBItvViwKrYrSLTnQFmQ/BC', 'Utilisateur', ''),
+('Mac', 'Fly', 'macfly@macfly.macfly', '$2b$10$AoZGjFosNQVZf4PfEFnL3O.rlD9w9v.8GSx2Ys409GRZOYWO.rLJS', 'Utilisateur', ''),
+('Zongo', 'Logo', 'Zongolo@logogo.go', '$2b$10$vJ2HKmcbg6EiAk8bdVceO.T2Hqq2jjwe9PlD4xWv2xHnRmzhBGDie', 'Utilisateur', '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `UtilisateursAllergies`
+-- Structure de la table `UtilisateursAllergies`
 --
 
 CREATE TABLE `UtilisateursAllergies` (
@@ -662,7 +663,7 @@ CREATE TABLE `UtilisateursAllergies` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `UtilisateursRestrictions`
+-- Structure de la table `UtilisateursRestrictions`
 --
 
 CREATE TABLE `UtilisateursRestrictions` (
@@ -673,18 +674,18 @@ CREATE TABLE `UtilisateursRestrictions` (
 -- --------------------------------------------------------
 
 --
--- Structure for view `countPersonneDay`
+-- Structure de la vue `countpersonneday`
 --
-DROP TABLE IF EXISTS `countPersonneDay`;
+DROP TABLE IF EXISTS `countpersonneday`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`syn`@`localhost` SQL SECURITY DEFINER VIEW `countPersonneDay`  AS SELECT sum(`Reservations`.`NbPersonnes`) AS `TotalPersonnes` FROM `Reservations` WHERE (`Reservations`.`Statut` = 'Prise' OR `Reservations`.`Statut` = 'En cours') AND `Reservations`.`DateHeure` >= curdate() AND `Reservations`.`DateHeure` < curdate() + interval 1 day ;
-
---
--- Indexes for dumped tables
---
+CREATE ALGORITHM=UNDEFINED DEFINER=`syn`@`localhost` SQL SECURITY DEFINER VIEW `countpersonneday`  AS SELECT sum(`reservations`.`NbPersonnes`) AS `TotalPersonnes` FROM `reservations` WHERE (`reservations`.`Statut` = 'Prise' OR `reservations`.`Statut` = 'En cours') AND `reservations`.`DateHeure` >= curdate() AND `reservations`.`DateHeure` < curdate() + interval 1 day ;
 
 --
--- Indexes for table `Additions`
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `Additions`
 --
 ALTER TABLE `Additions`
   ADD PRIMARY KEY (`ID`),
@@ -692,54 +693,54 @@ ALTER TABLE `Additions`
   ADD KEY `Reservations` (`Reservations`);
 
 --
--- Indexes for table `AdditionsPlats`
+-- Index pour la table `AdditionsPlats`
 --
 ALTER TABLE `AdditionsPlats`
   ADD PRIMARY KEY (`Plat`,`Addition`),
   ADD KEY `Addition` (`Addition`);
 
 --
--- Indexes for table `Allergies`
+-- Index pour la table `Allergies`
 --
 ALTER TABLE `Allergies`
   ADD PRIMARY KEY (`Nom`);
 
 --
--- Indexes for table `Ingredients`
+-- Index pour la table `Ingredients`
 --
 ALTER TABLE `Ingredients`
   ADD PRIMARY KEY (`Nom`),
   ADD KEY `Type` (`Type`);
 
 --
--- Indexes for table `Menus`
+-- Index pour la table `Menus`
 --
 ALTER TABLE `Menus`
   ADD PRIMARY KEY (`Menu`);
 
 --
--- Indexes for table `MenusPlats`
+-- Index pour la table `MenusPlats`
 --
 ALTER TABLE `MenusPlats`
   ADD PRIMARY KEY (`Menu`,`Plat`),
   ADD KEY `Plat` (`Plat`);
 
 --
--- Indexes for table `Plats`
+-- Index pour la table `Plats`
 --
 ALTER TABLE `Plats`
   ADD PRIMARY KEY (`Nom`),
   ADD KEY `Types` (`Types`);
 
 --
--- Indexes for table `PlatsIngredients`
+-- Index pour la table `PlatsIngredients`
 --
 ALTER TABLE `PlatsIngredients`
   ADD PRIMARY KEY (`Plat`,`Ingredients`),
   ADD KEY `Ingredients` (`Ingredients`);
 
 --
--- Indexes for table `Reservations`
+-- Index pour la table `Reservations`
 --
 ALTER TABLE `Reservations`
   ADD PRIMARY KEY (`ID`),
@@ -748,163 +749,163 @@ ALTER TABLE `Reservations`
   ADD KEY `Statut` (`Statut`);
 
 --
--- Indexes for table `ReservationsTables`
+-- Index pour la table `ReservationsTables`
 --
 ALTER TABLE `ReservationsTables`
   ADD PRIMARY KEY (`Reservation`,`Table`),
   ADD KEY `Table` (`Table`);
 
 --
--- Indexes for table `Restrictions`
+-- Index pour la table `Restrictions`
 --
 ALTER TABLE `Restrictions`
   ADD PRIMARY KEY (`Type`);
 
 --
--- Indexes for table `Roles`
+-- Index pour la table `Roles`
 --
 ALTER TABLE `Roles`
   ADD PRIMARY KEY (`Nom`);
 
 --
--- Indexes for table `Statuts`
+-- Index pour la table `Statuts`
 --
 ALTER TABLE `Statuts`
   ADD PRIMARY KEY (`Nom`);
 
 --
--- Indexes for table `Tables`
+-- Index pour la table `Tables`
 --
 ALTER TABLE `Tables`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `TypeIngredients`
+-- Index pour la table `TypeIngredients`
 --
 ALTER TABLE `TypeIngredients`
   ADD PRIMARY KEY (`Nom`);
 
 --
--- Indexes for table `TypesPlats`
+-- Index pour la table `TypesPlats`
 --
 ALTER TABLE `TypesPlats`
   ADD PRIMARY KEY (`Nom`);
 
 --
--- Indexes for table `Utilisateurs`
+-- Index pour la table `Utilisateurs`
 --
 ALTER TABLE `Utilisateurs`
   ADD PRIMARY KEY (`Email`),
   ADD KEY `Role` (`Role`);
 
 --
--- Indexes for table `UtilisateursAllergies`
+-- Index pour la table `UtilisateursAllergies`
 --
 ALTER TABLE `UtilisateursAllergies`
   ADD PRIMARY KEY (`Utilisateur`,`Allergie`),
   ADD KEY `Allergie` (`Allergie`);
 
 --
--- Indexes for table `UtilisateursRestrictions`
+-- Index pour la table `UtilisateursRestrictions`
 --
 ALTER TABLE `UtilisateursRestrictions`
   ADD PRIMARY KEY (`Utilisateur`,`Restriction`),
   ADD KEY `Restriction` (`Restriction`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `Additions`
+-- AUTO_INCREMENT pour la table `Additions`
 --
 ALTER TABLE `Additions`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `Reservations`
+-- AUTO_INCREMENT pour la table `Reservations`
 --
 ALTER TABLE `Reservations`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
--- AUTO_INCREMENT for table `Tables`
+-- AUTO_INCREMENT pour la table `Tables`
 --
 ALTER TABLE `Tables`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- Constraints for dumped tables
+-- Contraintes pour les tables déchargées
 --
 
 --
--- Constraints for table `Additions`
+-- Contraintes pour la table `Additions`
 --
 ALTER TABLE `Additions`
   ADD CONSTRAINT `Additions_ibfk_2` FOREIGN KEY (`Reservations`) REFERENCES `Reservations` (`ID`);
 
 --
--- Constraints for table `AdditionsPlats`
+-- Contraintes pour la table `AdditionsPlats`
 --
 ALTER TABLE `AdditionsPlats`
   ADD CONSTRAINT `AdditionsPlats_ibfk_1` FOREIGN KEY (`Plat`) REFERENCES `Plats` (`Nom`),
   ADD CONSTRAINT `AdditionsPlats_ibfk_2` FOREIGN KEY (`Addition`) REFERENCES `Additions` (`ID`);
 
 --
--- Constraints for table `Ingredients`
+-- Contraintes pour la table `Ingredients`
 --
 ALTER TABLE `Ingredients`
   ADD CONSTRAINT `Ingredients_ibfk_1` FOREIGN KEY (`Type`) REFERENCES `TypeIngredients` (`Nom`);
 
 --
--- Constraints for table `MenusPlats`
+-- Contraintes pour la table `MenusPlats`
 --
 ALTER TABLE `MenusPlats`
   ADD CONSTRAINT `MenusPlats_ibfk_1` FOREIGN KEY (`Menu`) REFERENCES `Menus` (`Menu`),
   ADD CONSTRAINT `MenusPlats_ibfk_2` FOREIGN KEY (`Plat`) REFERENCES `Plats` (`Nom`);
 
 --
--- Constraints for table `Plats`
+-- Contraintes pour la table `Plats`
 --
 ALTER TABLE `Plats`
   ADD CONSTRAINT `Plats_ibfk_1` FOREIGN KEY (`Types`) REFERENCES `TypesPlats` (`Nom`);
 
 --
--- Constraints for table `PlatsIngredients`
+-- Contraintes pour la table `PlatsIngredients`
 --
 ALTER TABLE `PlatsIngredients`
   ADD CONSTRAINT `PlatsIngredients_ibfk_1` FOREIGN KEY (`Plat`) REFERENCES `Plats` (`Nom`),
   ADD CONSTRAINT `PlatsIngredients_ibfk_2` FOREIGN KEY (`Ingredients`) REFERENCES `Ingredients` (`Nom`);
 
 --
--- Constraints for table `Reservations`
+-- Contraintes pour la table `Reservations`
 --
 ALTER TABLE `Reservations`
   ADD CONSTRAINT `Reservations_ibfk_1` FOREIGN KEY (`Utilisateur`) REFERENCES `Utilisateurs` (`Email`),
   ADD CONSTRAINT `Reservations_ibfk_2` FOREIGN KEY (`Statut`) REFERENCES `Statuts` (`Nom`);
 
 --
--- Constraints for table `ReservationsTables`
+-- Contraintes pour la table `ReservationsTables`
 --
 ALTER TABLE `ReservationsTables`
   ADD CONSTRAINT `ReservationsTables_ibfk_1` FOREIGN KEY (`Reservation`) REFERENCES `Reservations` (`ID`),
   ADD CONSTRAINT `ReservationsTables_ibfk_2` FOREIGN KEY (`Table`) REFERENCES `Tables` (`ID`);
 
 --
--- Constraints for table `Utilisateurs`
+-- Contraintes pour la table `Utilisateurs`
 --
 ALTER TABLE `Utilisateurs`
   ADD CONSTRAINT `Utilisateurs_ibfk_1` FOREIGN KEY (`Role`) REFERENCES `Roles` (`Nom`);
 
 --
--- Constraints for table `UtilisateursAllergies`
+-- Contraintes pour la table `UtilisateursAllergies`
 --
 ALTER TABLE `UtilisateursAllergies`
   ADD CONSTRAINT `UtilisateursAllergies_ibfk_1` FOREIGN KEY (`Utilisateur`) REFERENCES `Utilisateurs` (`Email`),
   ADD CONSTRAINT `UtilisateursAllergies_ibfk_2` FOREIGN KEY (`Allergie`) REFERENCES `Allergies` (`Nom`);
 
 --
--- Constraints for table `UtilisateursRestrictions`
+-- Contraintes pour la table `UtilisateursRestrictions`
 --
 ALTER TABLE `UtilisateursRestrictions`
   ADD CONSTRAINT `UtilisateursRestrictions_ibfk_1` FOREIGN KEY (`Utilisateur`) REFERENCES `Utilisateurs` (`Email`),
