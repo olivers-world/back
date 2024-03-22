@@ -3,10 +3,10 @@ const db = require("../../config/db.js");
 
 const maxPeople = 52;
 
-Date.prototype.addHours = function(h) {
-  this.setTime(this.getTime() + (h*60*60*1000));
+Date.prototype.addHours = function (h) {
+  this.setTime(this.getTime() + h * 60 * 60 * 1000);
   return this;
-}
+};
 
 exports.createReservation = (req, res) => {
   // Ici, vous récupérez les données envoyées avec la requête POST.
@@ -115,11 +115,83 @@ exports.getReservation = (req, res) => {
       } else {
         // Modifié la réponse de la bdd en lui rajoutant +1 heure car horraire décalé
         results.forEach(function (result) {
-          result.DateHeure = new Date(result.DateHeure).addHours(1);
+          // result.DateHeure = new Date(result.DateHeure).toLocaleString;
           console.log(result.DateHeure);
         });
         return res.status(200).json(results);
       }
     }
   );
+};
+
+exports.updateReservation = (req, res) => {
+  // Récupération de l'ID de la réservation à modifier ainsi que des nouvelles valeurs
+  const { reservationId, newDate, newNbPersonne, newUser } = req.body;
+
+  // Validation des données reçues
+  if (!(reservationId && (newDate || newNbPersonne || newUser))) {
+    return res.status(400).json({ message: "Missing data for update" });
+  }
+
+  // Construction de la requête SQL de mise à jour
+  let updateQuery = `UPDATE Reservations SET `;
+  const queryParams = [];
+
+  if (newUser) {
+    updateQuery += `Utilisateur = ?, `;
+    queryParams.push(newUser);
+  }
+
+  if (newDate) {
+    updateQuery += `DateHeure = ?, `;
+    queryParams.push(newDate);
+  }
+
+  if (newNbPersonne) {
+    updateQuery += `NbPersonnes = ?, `;
+    queryParams.push(newNbPersonne);
+  }
+
+  updateQuery = updateQuery.slice(0, -2); // Enlever la dernière virgule et espace
+  updateQuery += ` WHERE ID = ?`;
+  queryParams.push(reservationId);
+
+  // Exécution de la requête SQL pour mettre à jour la réservation
+  db.query(updateQuery, queryParams, (err, result) => {
+    if (err) {
+      return res.status(500).json({ message: "Database error", error: err });
+    } else if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "Reservation not found" });
+    } else {
+      return res
+        .status(200)
+        .json({ message: "Reservation updated successfully" });
+    }
+  });
+};
+
+exports.deleteReservation = (req, res) => {
+  // Récupération de l'ID de la réservation à supprimer
+  const { reservationId } = req.body;
+
+  // Valider les données reçues
+  if (!reservationId) {
+    return res.status(400).json({ message: "Reservation ID is required" });
+  }
+
+  // Construction de la requête SQL de suppression
+  const deleteQuery = `DELETE FROM Reservations WHERE ID = ?`;
+
+  // Exécution de la requête SQL pour supprimer la réservation
+  db.query(deleteQuery, [reservationId], (err, result) => {
+    if (err) {
+      return res.status(500).json({ message: "Database error", error: err });
+    } else if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "Reservation not found" });
+    } else {
+      return res
+        .status(200)
+        .json({ message: "Reservation deleted successfully" });
+    }
+  });
 };
