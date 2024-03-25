@@ -1,5 +1,6 @@
 require("dotenv").config();
 const db = require("../../config/db.js");
+const moment = require('moment-timezone');
 
 const maxPeople = 52;
 
@@ -73,6 +74,7 @@ exports.createReservation = (req, res) => {
 exports.getReservation = (req, res) => {
   // Récupérez la date et l'heure de la requête GET
   const { dateHeure } = req.query;
+  console.log("dateHeure : " + dateHeure);
 
   // Valider les données reçues
   if (!dateHeure) {
@@ -80,12 +82,13 @@ exports.getReservation = (req, res) => {
   }
 
   // Créer une date de début et de fin basées sur l'heure reçue
-  const dateTime = new Date(dateHeure);
+  const dateTime = new Date(dateHeure + "Z");
   const startOfHour = new Date(dateTime.setMinutes(0, 0, 0));
   const endOfHour = new Date(dateTime.setMinutes(59, 59, 999));
 
-  // console.log(startOfHour);
-  // console.log(endOfHour);
+  // console.log("dateTime : " + dateTime);
+  // console.log("startOfHour : " + startOfHour);
+  // console.log("endOfHour : " + endOfHour);
 
   // Formater pour SQL
   const startDateFormat = startOfHour
@@ -110,14 +113,10 @@ exports.getReservation = (req, res) => {
     [startDateFormat, endDateFormat],
     (err, results) => {
       if (err) {
-        // Gérer les erreurs de la base de données ici
+        // Gérer les erreurs de la base de données ici  
         return res.status(500).json({ message: "Database error", error: err });
       } else {
-        // Modifié la réponse de la bdd en lui rajoutant +1 heure car horraire décalé
-        results.forEach(function (result) {
-          // result.DateHeure = new Date(result.DateHeure).toLocaleString;
-          console.log(result.DateHeure);
-        });
+        console.log(results);
         return res.status(200).json(results);
       }
     }
