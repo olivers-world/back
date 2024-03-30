@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : jeu. 21 mars 2024 à 09:55
--- Version du serveur : 10.4.28-MariaDB
--- Version de PHP : 8.2.4
+-- Généré le : sam. 30 mars 2024 à 01:35
+-- Version du serveur : 11.3.2-MariaDB
+-- Version de PHP : 8.3.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -248,21 +248,21 @@ CREATE TABLE `MenusPlats` (
 
 INSERT INTO `MenusPlats` (`Menu`, `Plat`) VALUES
 ('Classiques du Bistrot', 'Boeuf Bourguignon'),
+('Voyage en Mer', 'Bouillabaisse'),
 ('Classiques du Bistrot', 'Cassoulet'),
+('Voyage en Mer', 'Ceviche'),
 ('Classiques du Bistrot', 'Crème Brûlée'),
-('Classiques du Bistrot', 'Quiche Lorraine'),
-('Classiques du Bistrot', 'Ratatouille'),
-('Classiques du Bistrot', 'Sangria'),
 ('Végétarien Gourmand', 'Falafel Wrap'),
 ('Végétarien Gourmand', 'Gazpacho'),
+('Voyage en Mer', 'Moules Marinières'),
+('Classiques du Bistrot', 'Quiche Lorraine'),
+('Classiques du Bistrot', 'Ratatouille'),
 ('Végétarien Gourmand', 'Ratatouille'),
 ('Végétarien Gourmand', 'Salade de Quinoa'),
 ('Végétarien Gourmand', 'Salade Niçoise'),
-('Végétarien Gourmand', 'Tiramisu'),
-('Voyage en Mer', 'Bouillabaisse'),
-('Voyage en Mer', 'Ceviche'),
-('Voyage en Mer', 'Moules Marinières'),
-('Voyage en Mer', 'Tarte Tatin');
+('Classiques du Bistrot', 'Sangria'),
+('Voyage en Mer', 'Tarte Tatin'),
+('Végétarien Gourmand', 'Tiramisu');
 
 -- --------------------------------------------------------
 
@@ -318,109 +318,109 @@ CREATE TABLE `PlatsIngredients` (
 --
 
 INSERT INTO `PlatsIngredients` (`Plat`, `Ingredients`) VALUES
-('Boeuf Bourguignon', 'Boeuf'),
-('Boeuf Bourguignon', 'Carottes'),
-('Boeuf Bourguignon', 'Champignons'),
-('Boeuf Bourguignon', 'Oignons'),
-('Boeuf Bourguignon', 'Vin rouge'),
 ('Bouillabaisse', 'Ail'),
-('Bouillabaisse', 'Crevettes'),
-('Bouillabaisse', 'Dorade'),
-('Bouillabaisse', 'La Baudroie'),
-('Bouillabaisse', 'La Vive'),
-('Bouillabaisse', 'Laurier'),
-('Bouillabaisse', 'Merlan'),
-('Bouillabaisse', 'Moules'),
-('Bouillabaisse', 'Pommes de terre'),
-('Bouillabaisse', 'Rascasse Rouge'),
-('Bouillabaisse', 'Rouget Barbet'),
 ('Cassoulet', 'Ail'),
-('Cassoulet', 'Canard'),
-('Cassoulet', 'Haricots'),
-('Cassoulet', 'Laurier'),
-('Cassoulet', 'Oignons'),
-('Cassoulet', 'Saucisse'),
-('Crème Brûlée', 'Crème'),
-('Crème Brûlée', 'Jaunes d\'oeufs'),
-('Crème Brûlée', 'Sucre'),
-('Crème Brûlée', 'Vanille'),
-('Falafel Wrap', 'Falafels'),
-('Falafel Wrap', 'Laitue'),
-('Falafel Wrap', 'Pain pita'),
-('Falafel Wrap', 'Sauce tahini'),
-('Falafel Wrap', 'Tomates'),
 ('Gazpacho', 'Ail'),
-('Gazpacho', 'Concombre'),
-('Gazpacho', 'Huile d\'olive'),
-('Gazpacho', 'Poivrons'),
-('Gazpacho', 'Tomates'),
-('Gazpacho', 'Vinaigre'),
-('Margherita Pizza', 'Basilic'),
-('Margherita Pizza', 'Farine'),
-('Margherita Pizza', 'Mozzarella'),
-('Margherita Pizza', 'Tomates'),
-('Moules Marinières', 'Beurre'),
-('Moules Marinières', 'Échalotes'),
-('Moules Marinières', 'Moules'),
-('Moules Marinières', 'Persil'),
-('Moules Marinières', 'Vin blanc'),
-('Paella', 'Crevettes'),
-('Paella', 'Moules'),
-('Paella', 'Poivrons'),
-('Paella', 'Poulet'),
-('Paella', 'Riz'),
-('Paella', 'Safran'),
-('Quiche Lorraine', 'Crème'),
-('Quiche Lorraine', 'Fromage de chèvre'),
-('Quiche Lorraine', 'Lardons'),
-('Quiche Lorraine', 'Oeufs'),
-('Quiche Lorraine', 'Pâtes'),
-('Ratatouille', 'Aubergines'),
-('Ratatouille', 'Courgettes'),
-('Ratatouille', 'Huile d\'olive'),
-('Ratatouille', 'Oignons'),
-('Ratatouille', 'Poivrons'),
-('Ratatouille', 'Tomates'),
-('Ravioli Ricotta e Spinaci', 'Épinards'),
-('Ravioli Ricotta e Spinaci', 'Ravioli'),
-('Ravioli Ricotta e Spinaci', 'Ricotta'),
-('Ravioli Ricotta e Spinaci', 'Sauce tomate'),
-('Risotto aux Champignons', 'Bouillon de légumes'),
-('Risotto aux Champignons', 'Champignons'),
-('Risotto aux Champignons', 'Parmesan'),
-('Risotto aux Champignons', 'Riz arborio'),
-('Risotto aux Champignons', 'Vin blanc'),
-('Salade de Quinoa', 'Citron'),
-('Salade de Quinoa', 'Concombre'),
-('Salade de Quinoa', 'Feta'),
-('Salade de Quinoa', 'Poivrons'),
-('Salade de Quinoa', 'Quinoa'),
-('Salade de Quinoa', 'Tomates'),
 ('Salade Niçoise', 'Anchois'),
-('Salade Niçoise', 'Haricots'),
-('Salade Niçoise', 'Oeufs'),
-('Salade Niçoise', 'Olives'),
-('Salade Niçoise', 'Thon'),
-('Salade Niçoise', 'Tomates'),
-('Sangria', 'Brandy'),
-('Sangria', 'Fruits variés'),
-('Sangria', 'Soda'),
-('Sangria', 'Sucres'),
-('Sangria', 'Vin rouge'),
-('Spaghetti Carbonara', 'Oeufs'),
-('Spaghetti Carbonara', 'Pancetta'),
-('Spaghetti Carbonara', 'Parmesan'),
-('Spaghetti Carbonara', 'Pâtes'),
-('Spaghetti Carbonara', 'Poivre'),
+('Ratatouille', 'Aubergines'),
+('Margherita Pizza', 'Basilic'),
+('Moules Marinières', 'Beurre'),
 ('Tarte Tatin', 'Beurre'),
-('Tarte Tatin', 'Pâte feuilletée'),
-('Tarte Tatin', 'Pommes'),
-('Tarte Tatin', 'Sucre'),
+('Boeuf Bourguignon', 'Boeuf'),
+('Risotto aux Champignons', 'Bouillon de légumes'),
+('Sangria', 'Brandy'),
 ('Tiramisu', 'Cacao'),
 ('Tiramisu', 'Café'),
+('Cassoulet', 'Canard'),
+('Boeuf Bourguignon', 'Carottes'),
+('Boeuf Bourguignon', 'Champignons'),
+('Risotto aux Champignons', 'Champignons'),
+('Salade de Quinoa', 'Citron'),
+('Gazpacho', 'Concombre'),
+('Salade de Quinoa', 'Concombre'),
+('Ratatouille', 'Courgettes'),
+('Crème Brûlée', 'Crème'),
+('Quiche Lorraine', 'Crème'),
+('Bouillabaisse', 'Crevettes'),
+('Paella', 'Crevettes'),
+('Bouillabaisse', 'Dorade'),
+('Moules Marinières', 'Échalotes'),
+('Ravioli Ricotta e Spinaci', 'Épinards'),
+('Falafel Wrap', 'Falafels'),
+('Margherita Pizza', 'Farine'),
+('Salade de Quinoa', 'Feta'),
+('Quiche Lorraine', 'Fromage de chèvre'),
+('Sangria', 'Fruits variés'),
+('Cassoulet', 'Haricots'),
+('Salade Niçoise', 'Haricots'),
+('Gazpacho', 'Huile d\'olive'),
+('Ratatouille', 'Huile d\'olive'),
+('Crème Brûlée', 'Jaunes d\'oeufs'),
+('Bouillabaisse', 'La Baudroie'),
+('Bouillabaisse', 'La Vive'),
+('Falafel Wrap', 'Laitue'),
+('Quiche Lorraine', 'Lardons'),
+('Bouillabaisse', 'Laurier'),
+('Cassoulet', 'Laurier'),
 ('Tiramisu', 'Mascarpone'),
+('Bouillabaisse', 'Merlan'),
+('Bouillabaisse', 'Moules'),
+('Moules Marinières', 'Moules'),
+('Paella', 'Moules'),
+('Margherita Pizza', 'Mozzarella'),
+('Quiche Lorraine', 'Oeufs'),
+('Salade Niçoise', 'Oeufs'),
+('Spaghetti Carbonara', 'Oeufs'),
 ('Tiramisu', 'Oeufs'),
-('Tiramisu', 'Sucre');
+('Boeuf Bourguignon', 'Oignons'),
+('Cassoulet', 'Oignons'),
+('Ratatouille', 'Oignons'),
+('Salade Niçoise', 'Olives'),
+('Falafel Wrap', 'Pain pita'),
+('Spaghetti Carbonara', 'Pancetta'),
+('Risotto aux Champignons', 'Parmesan'),
+('Spaghetti Carbonara', 'Parmesan'),
+('Tarte Tatin', 'Pâte feuilletée'),
+('Quiche Lorraine', 'Pâtes'),
+('Spaghetti Carbonara', 'Pâtes'),
+('Moules Marinières', 'Persil'),
+('Spaghetti Carbonara', 'Poivre'),
+('Gazpacho', 'Poivrons'),
+('Paella', 'Poivrons'),
+('Ratatouille', 'Poivrons'),
+('Salade de Quinoa', 'Poivrons'),
+('Tarte Tatin', 'Pommes'),
+('Bouillabaisse', 'Pommes de terre'),
+('Paella', 'Poulet'),
+('Salade de Quinoa', 'Quinoa'),
+('Bouillabaisse', 'Rascasse Rouge'),
+('Ravioli Ricotta e Spinaci', 'Ravioli'),
+('Ravioli Ricotta e Spinaci', 'Ricotta'),
+('Paella', 'Riz'),
+('Risotto aux Champignons', 'Riz arborio'),
+('Bouillabaisse', 'Rouget Barbet'),
+('Paella', 'Safran'),
+('Falafel Wrap', 'Sauce tahini'),
+('Ravioli Ricotta e Spinaci', 'Sauce tomate'),
+('Cassoulet', 'Saucisse'),
+('Sangria', 'Soda'),
+('Crème Brûlée', 'Sucre'),
+('Tarte Tatin', 'Sucre'),
+('Tiramisu', 'Sucre'),
+('Sangria', 'Sucres'),
+('Salade Niçoise', 'Thon'),
+('Falafel Wrap', 'Tomates'),
+('Gazpacho', 'Tomates'),
+('Margherita Pizza', 'Tomates'),
+('Ratatouille', 'Tomates'),
+('Salade de Quinoa', 'Tomates'),
+('Salade Niçoise', 'Tomates'),
+('Crème Brûlée', 'Vanille'),
+('Moules Marinières', 'Vin blanc'),
+('Risotto aux Champignons', 'Vin blanc'),
+('Boeuf Bourguignon', 'Vin rouge'),
+('Sangria', 'Vin rouge'),
+('Gazpacho', 'Vinaigre');
 
 -- --------------------------------------------------------
 
@@ -430,7 +430,8 @@ INSERT INTO `PlatsIngredients` (`Plat`, `Ingredients`) VALUES
 
 CREATE TABLE `Reservations` (
   `ID` int(11) NOT NULL,
-  `Utilisateur` varchar(255) NOT NULL,
+  `Email` varchar(255) NOT NULL,
+  `Nom` varchar(255) NOT NULL,
   `DateHeure` datetime NOT NULL,
   `NbPersonnes` int(11) NOT NULL,
   `Statut` varchar(255) NOT NULL DEFAULT 'Prise'
@@ -440,20 +441,12 @@ CREATE TABLE `Reservations` (
 -- Déchargement des données de la table `Reservations`
 --
 
-INSERT INTO `Reservations` (`ID`, `Utilisateur`, `DateHeure`, `NbPersonnes`, `Statut`) VALUES
-(1, 'djej@djej.djej', '2024-03-17 20:14:25', 2, 'Prise'),
-(2, 'carlito@carlito.carlito', '2024-03-17 16:21:41', 2, 'Prise'),
-(11, 'jesus@christ.fr', '2024-03-17 20:22:05', 4, 'Prise'),
-(12, 'je.suis@schizophrene.aol', '2024-03-19 21:22:07', 5, 'Prise'),
-(13, 'macfly@macfly.macfly', '2024-03-20 21:22:07', 6, 'Prise'),
-(14, 'macfly@macfly.macfly', '2024-03-17 17:22:07', 6, 'Prise'),
-(15, 'carlito@carlito.carlito', '2024-03-08 12:00:00', 1, 'Prise'),
-(16, 'carlito@carlito.carlito', '2024-03-08 19:20:00', 8, 'Prise'),
-(18, 'carlito@carlito.carlito', '2024-03-11 12:30:00', 1, 'Prise'),
-(21, 'carlito@carlito.carlito', '2024-03-08 12:10:00', 1, 'Prise'),
-(23, 'carlito@carlito.carlito', '2024-03-17 12:10:00', 1, 'Prise'),
-(24, 'carlito@carlito.carlito', '2024-03-08 19:30:00', 5, 'Prise'),
-(25, 'carlito@carlito.carlito', '2024-03-15 12:00:00', 1, 'Prise');
+INSERT INTO `Reservations` (`ID`, `Email`, `Nom`, `DateHeure`, `NbPersonnes`, `Statut`) VALUES
+(75, 'Djej', 'djej@djej.djej', '2024-03-30 12:00:00', 1, 'Prise'),
+(77, 'Djaj', 'djaj@djaj.djaj', '2024-03-30 12:05:00', 1, 'Prise'),
+(79, 'Djej', 'djaj@djaj.djaj', '2024-03-30 12:10:00', 1, 'Prise'),
+(80, 'dfdfdf', 'ddfdf', '2024-03-30 12:15:00', 1, 'Prise'),
+(82, 'aaaaa', 'jjjj', '2024-03-30 12:25:00', 1, 'Prise');
 
 -- --------------------------------------------------------
 
@@ -643,7 +636,7 @@ CREATE TABLE `Utilisateurs` (
 
 INSERT INTO `Utilisateurs` (`Nom`, `Prenom`, `Email`, `MotDePasse`, `Role`, `refreshToken`) VALUES
 ('Carlito', 'Carlito', 'carlito@carlito.carlito', '$2b$10$VicTb5Q5Ql7UPhhL285P3usj10M8tj5BtwW0LVdWxfyCt82QivQVO', 'Utilisateur', ''),
-('Djej', 'Djej', 'djej@djej.djej', '$2b$10$W0NBggrzZlGko6hBE1Q2te0QoGDt8oig5Rg.jEVPM6y7VSlioajzW', 'Administrateur', ''),
+('Djej', 'Djej', 'djej@djej.djej', '$2b$10$W0NBggrzZlGko6hBE1Q2te0QoGDt8oig5Rg.jEVPM6y7VSlioajzW', 'Administrateur', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRqZWpAZGplai5kamVqIiwicm9sZXMiOiJBZG1pbmlzdHJhdGV1ciIsImlhdCI6MTcxMTc2MDAwNSwiZXhwIjoxNzEyMzY0ODA1fQ.02sa5Pdmtx23ezATzxUCpVaqXu203M1wt14pVloPdg0'),
 ('Terry', 'Davis', 'je.suis@schizophrene.aol', '$2b$10$LEOYpil6eJtjUfdRNa1Ae.ZNUBNfB.JzprQJSdL94QvEB6VY0CkN6', 'Utilisateur', ''),
 ('Jesus', 'Christ', 'jesus@christ.fr', '$2b$10$6jtLIsz4Bt4nMTXHgeLI5ehCP34sHliBItvViwKrYrSLTnQFmQ/BC', 'Utilisateur', ''),
 ('Mac', 'Fly', 'macfly@macfly.macfly', '$2b$10$AoZGjFosNQVZf4PfEFnL3O.rlD9w9v.8GSx2Ys409GRZOYWO.rLJS', 'Utilisateur', ''),
@@ -745,7 +738,6 @@ ALTER TABLE `PlatsIngredients`
 ALTER TABLE `Reservations`
   ADD PRIMARY KEY (`ID`),
   ADD UNIQUE KEY `DateHeure` (`DateHeure`),
-  ADD KEY `Utilisateur` (`Utilisateur`),
   ADD KEY `Statut` (`Statut`);
 
 --
@@ -826,7 +818,7 @@ ALTER TABLE `Additions`
 -- AUTO_INCREMENT pour la table `Reservations`
 --
 ALTER TABLE `Reservations`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT pour la table `Tables`
@@ -881,7 +873,6 @@ ALTER TABLE `PlatsIngredients`
 -- Contraintes pour la table `Reservations`
 --
 ALTER TABLE `Reservations`
-  ADD CONSTRAINT `Reservations_ibfk_1` FOREIGN KEY (`Utilisateur`) REFERENCES `Utilisateurs` (`Email`),
   ADD CONSTRAINT `Reservations_ibfk_2` FOREIGN KEY (`Statut`) REFERENCES `Statuts` (`Nom`);
 
 --
