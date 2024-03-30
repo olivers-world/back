@@ -1,6 +1,6 @@
 require("dotenv").config();
 const db = require("../../config/db.js");
-const moment = require('moment-timezone');
+const moment = require("moment-timezone");
 
 const maxPeople = 52;
 
@@ -11,13 +11,13 @@ Date.prototype.addHours = function (h) {
 
 exports.createReservation = (req, res) => {
   // Ici, vous récupérez les données envoyées avec la requête POST.
-  const { date, nbPersonne, user } = req.body;
+  const { email, nom, date, nbPersonne } = req.body;
 
   // Valider les données reçues
-  if (!(user && date && nbPersonne)) {
+  if (!(email && nom && date && nbPersonne)) {
     return res
       .status(400)
-      .json({ message: "User, date, and number of people are required" });
+      .json({ message: "Email, nom, date, and number of people are required" });
   }
 
   // Vérifier s'il y a assez de place pour la nouvelle réservation
@@ -44,14 +44,14 @@ exports.createReservation = (req, res) => {
     } else {
       // Il y a assez de place, on peut insérer la nouvelle réservation
       const createReservationQuery = `
-        INSERT INTO Reservations (Utilisateur, DateHeure, NbPersonnes, Statut)
-        VALUES (?, ?, ?, 'Prise')
+        INSERT INTO Reservations (Email, Nom, DateHeure, NbPersonnes, Statut)
+        VALUES (?, ?, ?, ?, 'Prise')
       `;
 
       // Exécution de la requête SQL pour créer la réservation
       db.query(
         createReservationQuery,
-        [user, date, nbPersonne],
+        [email, nom, date, nbPersonne],
         (err, result) => {
           if (err) {
             // Gérer les erreurs de la base de données ici
@@ -73,32 +73,54 @@ exports.createReservation = (req, res) => {
 
 exports.getReservation = (req, res) => {
   // Récupérez la date et l'heure de la requête GET
-  const { dateHeure } = req.query;
-  console.log("dateHeure : " + dateHeure);
+  const { from, to } = req.query;
+  console.log("from : " + from);
+  console.log("to : " + to);
 
   // Valider les données reçues
-  if (!dateHeure) {
-    return res.status(400).json({ message: "Date and time are required" });
+  if (!from || !to) {
+    return res
+      .status(400)
+      .json({ message: "From date and To date are required" });
+  }
+
+  // Vérifiez si 'from' et 'to' sont des dates valides
+  const fromDate = Date.parse(from);
+  const toDate = Date.parse(to);
+
+  if (isNaN(fromDate) || isNaN(toDate)) {
+    return res
+      .status(400)
+      .json({
+        message: "Invalid date format. Please use a valid date format.",
+      });
   }
 
   // Créer une date de début et de fin basées sur l'heure reçue
-  const dateTime = new Date(dateHeure + "Z");
-  const startOfHour = new Date(dateTime.setMinutes(0, 0, 0));
-  const endOfHour = new Date(dateTime.setMinutes(59, 59, 999));
+  const fromTime = new Date(from + "Z");
+  const toTime = new Date(to + "Z");
 
-  // console.log("dateTime : " + dateTime);
-  // console.log("startOfHour : " + startOfHour);
-  // console.log("endOfHour : " + endOfHour);
+  console.log("fromTime : " + fromTime);
+  console.log("toTime : " + toTime);
+
+  const startOfHour = new Date(fromTime.setMinutes(0, 0, 0));
+  const endOfHour = new Date(toTime.setMinutes(0, 0, 0));
+
+  console.log("startOfHour : " + startOfHour);
+  console.log("endOfHour : " + endOfHour);
 
   // Formater pour SQL
   const startDateFormat = startOfHour
     .toISOString()
     .slice(0, 19)
     .replace("T", " ");
-  const endDateFormat = endOfHour.toISOString().slice(0, 19).replace("T", " ");
+  const endDateFormat = endOfHour
+    .toISOString()
+    .slice(0, 19)
+    .replace("T", " ");
 
-  // console.log(startDateFormat);
-  // console.log(endDateFormat);
+  console.log(startDateFormat);
+  console.log(endDateFormat);
 
   // Requête SQL pour récupérer les réservations pour l'heure donnée
   const getReservationsQuery = `
@@ -113,7 +135,7 @@ exports.getReservation = (req, res) => {
     [startDateFormat, endDateFormat],
     (err, results) => {
       if (err) {
-        // Gérer les erreurs de la base de données ici  
+        // Gérer les erreurs de la base de données ici
         return res.status(500).json({ message: "Database error", error: err });
       } else {
         console.log(results);
