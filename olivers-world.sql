@@ -669,9 +669,9 @@ CREATE TABLE `UtilisateursRestrictions` (
 --
 -- Structure de la vue `countpersonneday`
 --
-DROP TABLE IF EXISTS `countpersonneday`;
+-- DROP TABLE IF EXISTS `countpersonneday`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`syn`@`localhost` SQL SECURITY DEFINER VIEW `countpersonneday`  AS SELECT sum(`reservations`.`NbPersonnes`) AS `TotalPersonnes` FROM `reservations` WHERE (`reservations`.`Statut` = 'Prise' OR `reservations`.`Statut` = 'En cours') AND `reservations`.`DateHeure` >= curdate() AND `reservations`.`DateHeure` < curdate() + interval 1 day ;
+-- CREATE ALGORITHM=UNDEFINED DEFINER=`syn`@`localhost` SQL SECURITY DEFINER VIEW `countpersonneday`  AS SELECT sum(`reservations`.`NbPersonnes`) AS `TotalPersonnes` FROM `reservations` WHERE (`reservations`.`Statut` = 'Prise' OR `reservations`.`Statut` = 'En cours') AND `reservations`.`DateHeure` >= curdate() AND `reservations`.`DateHeure` < curdate() + interval 1 day ;
 
 --
 -- Index pour les tables déchargées
