@@ -147,10 +147,10 @@ exports.getReservation = (req, res) => {
 
 exports.updateReservation = (req, res) => {
   // Récupération de l'ID de la réservation à modifier ainsi que des nouvelles valeurs
-  const { reservationId, newDate, newNbPersonne, newUser } = req.body;
+  const { reservationId, newNom, newDate, newNbPersonne } = req.body;
 
   // Validation des données reçues
-  if (!(reservationId && (newDate || newNbPersonne || newUser))) {
+  if (!(reservationId && (newDate || newNbPersonne || newNom))) {
     return res.status(400).json({ message: "Missing data for update" });
   }
 
@@ -158,9 +158,9 @@ exports.updateReservation = (req, res) => {
   let updateQuery = `UPDATE Reservations SET `;
   const queryParams = [];
 
-  if (newUser) {
-    updateQuery += `Utilisateur = ?, `;
-    queryParams.push(newUser);
+  if (newNom) {
+    updateQuery += `Nom = ?, `;
+    queryParams.push(newNom);
   }
 
   if (newDate) {
