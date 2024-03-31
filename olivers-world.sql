@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost
--- Généré le : sam. 30 mars 2024 à 01:35
--- Version du serveur : 11.3.2-MariaDB
--- Version de PHP : 8.3.4
+-- Host: localhost
+-- Generation Time: Mar 31, 2024 at 01:16 PM
+-- Server version: 11.3.2-MariaDB
+-- PHP Version: 8.3.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `olivers-world`
+-- Database: `olivers-world`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Additions`
+-- Table structure for table `Additions`
 --
 
 CREATE TABLE `Additions` (
@@ -37,7 +37,7 @@ CREATE TABLE `Additions` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `AdditionsPlats`
+-- Table structure for table `AdditionsPlats`
 --
 
 CREATE TABLE `AdditionsPlats` (
@@ -48,7 +48,7 @@ CREATE TABLE `AdditionsPlats` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Allergies`
+-- Table structure for table `Allergies`
 --
 
 CREATE TABLE `Allergies` (
@@ -56,7 +56,7 @@ CREATE TABLE `Allergies` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `Allergies`
+-- Dumping data for table `Allergies`
 --
 
 INSERT INTO `Allergies` (`Nom`) VALUES
@@ -75,17 +75,7 @@ INSERT INTO `Allergies` (`Nom`) VALUES
 -- --------------------------------------------------------
 
 --
--- Doublure de structure pour la vue `countpersonneday`
--- (Voir ci-dessous la vue réelle)
---
-CREATE TABLE `countpersonneday` (
-`TotalPersonnes` decimal(32,0)
-);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `Ingredients`
+-- Table structure for table `Ingredients`
 --
 
 CREATE TABLE `Ingredients` (
@@ -94,7 +84,7 @@ CREATE TABLE `Ingredients` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `Ingredients`
+-- Dumping data for table `Ingredients`
 --
 
 INSERT INTO `Ingredients` (`Nom`, `Type`) VALUES
@@ -214,7 +204,29 @@ INSERT INTO `Ingredients` (`Nom`, `Type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Menus`
+-- Table structure for table `Inventaire`
+--
+
+CREATE TABLE `Inventaire` (
+  `ID` int(11) NOT NULL,
+  `Date` date NOT NULL,
+  `Fait` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `Inventaire`
+--
+
+INSERT INTO `Inventaire` (`ID`, `Date`, `Fait`) VALUES
+(1, '2024-03-06', 1),
+(2, '2024-03-20', 1),
+(3, '2024-04-03', 1),
+(4, '2024-04-10', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Menus`
 --
 
 CREATE TABLE `Menus` (
@@ -223,7 +235,7 @@ CREATE TABLE `Menus` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `Menus`
+-- Dumping data for table `Menus`
 --
 
 INSERT INTO `Menus` (`Menu`, `Prix`) VALUES
@@ -234,7 +246,7 @@ INSERT INTO `Menus` (`Menu`, `Prix`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `MenusPlats`
+-- Table structure for table `MenusPlats`
 --
 
 CREATE TABLE `MenusPlats` (
@@ -243,7 +255,7 @@ CREATE TABLE `MenusPlats` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `MenusPlats`
+-- Dumping data for table `MenusPlats`
 --
 
 INSERT INTO `MenusPlats` (`Menu`, `Plat`) VALUES
@@ -267,7 +279,31 @@ INSERT INTO `MenusPlats` (`Menu`, `Plat`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Plats`
+-- Table structure for table `Nettoyage`
+--
+
+CREATE TABLE `Nettoyage` (
+  `ID` int(11) NOT NULL,
+  `Date` date NOT NULL,
+  `Fait` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `Nettoyage`
+--
+
+INSERT INTO `Nettoyage` (`ID`, `Date`, `Fait`) VALUES
+(1, '2024-03-04', 1),
+(2, '2024-03-11', 1),
+(3, '2024-03-18', 1),
+(4, '2024-03-25', 1),
+(5, '2024-04-01', 1),
+(6, '2024-04-08', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Plats`
 --
 
 CREATE TABLE `Plats` (
@@ -277,7 +313,7 @@ CREATE TABLE `Plats` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `Plats`
+-- Dumping data for table `Plats`
 --
 
 INSERT INTO `Plats` (`Nom`, `Prix`, `Types`) VALUES
@@ -305,7 +341,7 @@ INSERT INTO `Plats` (`Nom`, `Prix`, `Types`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `PlatsIngredients`
+-- Table structure for table `PlatsIngredients`
 --
 
 CREATE TABLE `PlatsIngredients` (
@@ -314,7 +350,7 @@ CREATE TABLE `PlatsIngredients` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `PlatsIngredients`
+-- Dumping data for table `PlatsIngredients`
 --
 
 INSERT INTO `PlatsIngredients` (`Plat`, `Ingredients`) VALUES
@@ -425,7 +461,7 @@ INSERT INTO `PlatsIngredients` (`Plat`, `Ingredients`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Reservations`
+-- Table structure for table `Reservations`
 --
 
 CREATE TABLE `Reservations` (
@@ -438,7 +474,7 @@ CREATE TABLE `Reservations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `Reservations`
+-- Dumping data for table `Reservations`
 --
 
 INSERT INTO `Reservations` (`ID`, `Email`, `Nom`, `DateHeure`, `NbPersonnes`, `Statut`) VALUES
@@ -446,12 +482,14 @@ INSERT INTO `Reservations` (`ID`, `Email`, `Nom`, `DateHeure`, `NbPersonnes`, `S
 (77, 'Djaj', 'djaj@djaj.djaj', '2024-03-30 12:05:00', 1, 'Prise'),
 (79, 'Djej', 'djaj@djaj.djaj', '2024-03-30 12:10:00', 1, 'Prise'),
 (80, 'dfdfdf', 'ddfdf', '2024-03-30 12:15:00', 1, 'Prise'),
-(82, 'aaaaa', 'jjjj', '2024-03-30 12:25:00', 1, 'Prise');
+(82, 'aaaaa', 'jjjj', '2024-03-30 12:25:00', 1, 'Prise'),
+(91, 'djej@djej.djej', 'djejdj', '2024-04-11 12:00:00', 3, 'Prise'),
+(92, 'djej@djej.djej', 'DjejOO', '2024-03-31 18:00:00', 4, 'Prise');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `ReservationsTables`
+-- Table structure for table `ReservationsTables`
 --
 
 CREATE TABLE `ReservationsTables` (
@@ -462,7 +500,7 @@ CREATE TABLE `ReservationsTables` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Restrictions`
+-- Table structure for table `Restrictions`
 --
 
 CREATE TABLE `Restrictions` (
@@ -470,7 +508,7 @@ CREATE TABLE `Restrictions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `Restrictions`
+-- Dumping data for table `Restrictions`
 --
 
 INSERT INTO `Restrictions` (`Type`) VALUES
@@ -485,7 +523,7 @@ INSERT INTO `Restrictions` (`Type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Roles`
+-- Table structure for table `Roles`
 --
 
 CREATE TABLE `Roles` (
@@ -494,7 +532,7 @@ CREATE TABLE `Roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `Roles`
+-- Dumping data for table `Roles`
 --
 
 INSERT INTO `Roles` (`Nom`, `Permissions`) VALUES
@@ -505,7 +543,7 @@ INSERT INTO `Roles` (`Nom`, `Permissions`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Statuts`
+-- Table structure for table `Statuts`
 --
 
 CREATE TABLE `Statuts` (
@@ -513,7 +551,7 @@ CREATE TABLE `Statuts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `Statuts`
+-- Dumping data for table `Statuts`
 --
 
 INSERT INTO `Statuts` (`Nom`) VALUES
@@ -525,7 +563,7 @@ INSERT INTO `Statuts` (`Nom`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Tables`
+-- Table structure for table `Tables`
 --
 
 CREATE TABLE `Tables` (
@@ -534,7 +572,7 @@ CREATE TABLE `Tables` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `Tables`
+-- Dumping data for table `Tables`
 --
 
 INSERT INTO `Tables` (`ID`, `NbCouverts`) VALUES
@@ -555,7 +593,7 @@ INSERT INTO `Tables` (`ID`, `NbCouverts`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `TypeIngredients`
+-- Table structure for table `TypeIngredients`
 --
 
 CREATE TABLE `TypeIngredients` (
@@ -563,7 +601,7 @@ CREATE TABLE `TypeIngredients` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `TypeIngredients`
+-- Dumping data for table `TypeIngredients`
 --
 
 INSERT INTO `TypeIngredients` (`Nom`) VALUES
@@ -587,7 +625,7 @@ INSERT INTO `TypeIngredients` (`Nom`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `TypesPlats`
+-- Table structure for table `TypesPlats`
 --
 
 CREATE TABLE `TypesPlats` (
@@ -595,7 +633,7 @@ CREATE TABLE `TypesPlats` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `TypesPlats`
+-- Dumping data for table `TypesPlats`
 --
 
 INSERT INTO `TypesPlats` (`Nom`) VALUES
@@ -618,7 +656,7 @@ INSERT INTO `TypesPlats` (`Nom`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Utilisateurs`
+-- Table structure for table `Utilisateurs`
 --
 
 CREATE TABLE `Utilisateurs` (
@@ -631,7 +669,7 @@ CREATE TABLE `Utilisateurs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `Utilisateurs`
+-- Dumping data for table `Utilisateurs`
 --
 
 INSERT INTO `Utilisateurs` (`Nom`, `Prenom`, `Email`, `MotDePasse`, `Role`, `refreshToken`) VALUES
@@ -645,7 +683,7 @@ INSERT INTO `Utilisateurs` (`Nom`, `Prenom`, `Email`, `MotDePasse`, `Role`, `ref
 -- --------------------------------------------------------
 
 --
--- Structure de la table `UtilisateursAllergies`
+-- Table structure for table `UtilisateursAllergies`
 --
 
 CREATE TABLE `UtilisateursAllergies` (
@@ -656,7 +694,7 @@ CREATE TABLE `UtilisateursAllergies` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `UtilisateursRestrictions`
+-- Table structure for table `UtilisateursRestrictions`
 --
 
 CREATE TABLE `UtilisateursRestrictions` (
@@ -664,21 +702,12 @@ CREATE TABLE `UtilisateursRestrictions` (
   `Restriction` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- --------------------------------------------------------
-
 --
--- Structure de la vue `countpersonneday`
---
--- DROP TABLE IF EXISTS `countpersonneday`;
-
--- CREATE ALGORITHM=UNDEFINED DEFINER=`syn`@`localhost` SQL SECURITY DEFINER VIEW `countpersonneday`  AS SELECT sum(`reservations`.`NbPersonnes`) AS `TotalPersonnes` FROM `reservations` WHERE (`reservations`.`Statut` = 'Prise' OR `reservations`.`Statut` = 'En cours') AND `reservations`.`DateHeure` >= curdate() AND `reservations`.`DateHeure` < curdate() + interval 1 day ;
-
---
--- Index pour les tables déchargées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `Additions`
+-- Indexes for table `Additions`
 --
 ALTER TABLE `Additions`
   ADD PRIMARY KEY (`ID`),
@@ -686,54 +715,66 @@ ALTER TABLE `Additions`
   ADD KEY `Reservations` (`Reservations`);
 
 --
--- Index pour la table `AdditionsPlats`
+-- Indexes for table `AdditionsPlats`
 --
 ALTER TABLE `AdditionsPlats`
   ADD PRIMARY KEY (`Plat`,`Addition`),
   ADD KEY `Addition` (`Addition`);
 
 --
--- Index pour la table `Allergies`
+-- Indexes for table `Allergies`
 --
 ALTER TABLE `Allergies`
   ADD PRIMARY KEY (`Nom`);
 
 --
--- Index pour la table `Ingredients`
+-- Indexes for table `Ingredients`
 --
 ALTER TABLE `Ingredients`
   ADD PRIMARY KEY (`Nom`),
   ADD KEY `Type` (`Type`);
 
 --
--- Index pour la table `Menus`
+-- Indexes for table `Inventaire`
+--
+ALTER TABLE `Inventaire`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `Menus`
 --
 ALTER TABLE `Menus`
   ADD PRIMARY KEY (`Menu`);
 
 --
--- Index pour la table `MenusPlats`
+-- Indexes for table `MenusPlats`
 --
 ALTER TABLE `MenusPlats`
   ADD PRIMARY KEY (`Menu`,`Plat`),
   ADD KEY `Plat` (`Plat`);
 
 --
--- Index pour la table `Plats`
+-- Indexes for table `Nettoyage`
+--
+ALTER TABLE `Nettoyage`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `Plats`
 --
 ALTER TABLE `Plats`
   ADD PRIMARY KEY (`Nom`),
   ADD KEY `Types` (`Types`);
 
 --
--- Index pour la table `PlatsIngredients`
+-- Indexes for table `PlatsIngredients`
 --
 ALTER TABLE `PlatsIngredients`
   ADD PRIMARY KEY (`Plat`,`Ingredients`),
   ADD KEY `Ingredients` (`Ingredients`);
 
 --
--- Index pour la table `Reservations`
+-- Indexes for table `Reservations`
 --
 ALTER TABLE `Reservations`
   ADD PRIMARY KEY (`ID`),
@@ -741,162 +782,174 @@ ALTER TABLE `Reservations`
   ADD KEY `Statut` (`Statut`);
 
 --
--- Index pour la table `ReservationsTables`
+-- Indexes for table `ReservationsTables`
 --
 ALTER TABLE `ReservationsTables`
   ADD PRIMARY KEY (`Reservation`,`Table`),
   ADD KEY `Table` (`Table`);
 
 --
--- Index pour la table `Restrictions`
+-- Indexes for table `Restrictions`
 --
 ALTER TABLE `Restrictions`
   ADD PRIMARY KEY (`Type`);
 
 --
--- Index pour la table `Roles`
+-- Indexes for table `Roles`
 --
 ALTER TABLE `Roles`
   ADD PRIMARY KEY (`Nom`);
 
 --
--- Index pour la table `Statuts`
+-- Indexes for table `Statuts`
 --
 ALTER TABLE `Statuts`
   ADD PRIMARY KEY (`Nom`);
 
 --
--- Index pour la table `Tables`
+-- Indexes for table `Tables`
 --
 ALTER TABLE `Tables`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Index pour la table `TypeIngredients`
+-- Indexes for table `TypeIngredients`
 --
 ALTER TABLE `TypeIngredients`
   ADD PRIMARY KEY (`Nom`);
 
 --
--- Index pour la table `TypesPlats`
+-- Indexes for table `TypesPlats`
 --
 ALTER TABLE `TypesPlats`
   ADD PRIMARY KEY (`Nom`);
 
 --
--- Index pour la table `Utilisateurs`
+-- Indexes for table `Utilisateurs`
 --
 ALTER TABLE `Utilisateurs`
   ADD PRIMARY KEY (`Email`),
   ADD KEY `Role` (`Role`);
 
 --
--- Index pour la table `UtilisateursAllergies`
+-- Indexes for table `UtilisateursAllergies`
 --
 ALTER TABLE `UtilisateursAllergies`
   ADD PRIMARY KEY (`Utilisateur`,`Allergie`),
   ADD KEY `Allergie` (`Allergie`);
 
 --
--- Index pour la table `UtilisateursRestrictions`
+-- Indexes for table `UtilisateursRestrictions`
 --
 ALTER TABLE `UtilisateursRestrictions`
   ADD PRIMARY KEY (`Utilisateur`,`Restriction`),
   ADD KEY `Restriction` (`Restriction`);
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `Additions`
+-- AUTO_INCREMENT for table `Additions`
 --
 ALTER TABLE `Additions`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `Reservations`
+-- AUTO_INCREMENT for table `Inventaire`
 --
-ALTER TABLE `Reservations`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+ALTER TABLE `Inventaire`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT pour la table `Tables`
+-- AUTO_INCREMENT for table `Nettoyage`
+--
+ALTER TABLE `Nettoyage`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `Reservations`
+--
+ALTER TABLE `Reservations`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+
+--
+-- AUTO_INCREMENT for table `Tables`
 --
 ALTER TABLE `Tables`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- Contraintes pour les tables déchargées
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `Additions`
+-- Constraints for table `Additions`
 --
 ALTER TABLE `Additions`
   ADD CONSTRAINT `Additions_ibfk_2` FOREIGN KEY (`Reservations`) REFERENCES `Reservations` (`ID`);
 
 --
--- Contraintes pour la table `AdditionsPlats`
+-- Constraints for table `AdditionsPlats`
 --
 ALTER TABLE `AdditionsPlats`
   ADD CONSTRAINT `AdditionsPlats_ibfk_1` FOREIGN KEY (`Plat`) REFERENCES `Plats` (`Nom`),
   ADD CONSTRAINT `AdditionsPlats_ibfk_2` FOREIGN KEY (`Addition`) REFERENCES `Additions` (`ID`);
 
 --
--- Contraintes pour la table `Ingredients`
+-- Constraints for table `Ingredients`
 --
 ALTER TABLE `Ingredients`
   ADD CONSTRAINT `Ingredients_ibfk_1` FOREIGN KEY (`Type`) REFERENCES `TypeIngredients` (`Nom`);
 
 --
--- Contraintes pour la table `MenusPlats`
+-- Constraints for table `MenusPlats`
 --
 ALTER TABLE `MenusPlats`
   ADD CONSTRAINT `MenusPlats_ibfk_1` FOREIGN KEY (`Menu`) REFERENCES `Menus` (`Menu`),
   ADD CONSTRAINT `MenusPlats_ibfk_2` FOREIGN KEY (`Plat`) REFERENCES `Plats` (`Nom`);
 
 --
--- Contraintes pour la table `Plats`
+-- Constraints for table `Plats`
 --
 ALTER TABLE `Plats`
   ADD CONSTRAINT `Plats_ibfk_1` FOREIGN KEY (`Types`) REFERENCES `TypesPlats` (`Nom`);
 
 --
--- Contraintes pour la table `PlatsIngredients`
+-- Constraints for table `PlatsIngredients`
 --
 ALTER TABLE `PlatsIngredients`
   ADD CONSTRAINT `PlatsIngredients_ibfk_1` FOREIGN KEY (`Plat`) REFERENCES `Plats` (`Nom`),
   ADD CONSTRAINT `PlatsIngredients_ibfk_2` FOREIGN KEY (`Ingredients`) REFERENCES `Ingredients` (`Nom`);
 
 --
--- Contraintes pour la table `Reservations`
+-- Constraints for table `Reservations`
 --
 ALTER TABLE `Reservations`
   ADD CONSTRAINT `Reservations_ibfk_2` FOREIGN KEY (`Statut`) REFERENCES `Statuts` (`Nom`);
 
 --
--- Contraintes pour la table `ReservationsTables`
+-- Constraints for table `ReservationsTables`
 --
 ALTER TABLE `ReservationsTables`
   ADD CONSTRAINT `ReservationsTables_ibfk_1` FOREIGN KEY (`Reservation`) REFERENCES `Reservations` (`ID`),
   ADD CONSTRAINT `ReservationsTables_ibfk_2` FOREIGN KEY (`Table`) REFERENCES `Tables` (`ID`);
 
 --
--- Contraintes pour la table `Utilisateurs`
+-- Constraints for table `Utilisateurs`
 --
 ALTER TABLE `Utilisateurs`
   ADD CONSTRAINT `Utilisateurs_ibfk_1` FOREIGN KEY (`Role`) REFERENCES `Roles` (`Nom`);
 
 --
--- Contraintes pour la table `UtilisateursAllergies`
+-- Constraints for table `UtilisateursAllergies`
 --
 ALTER TABLE `UtilisateursAllergies`
   ADD CONSTRAINT `UtilisateursAllergies_ibfk_1` FOREIGN KEY (`Utilisateur`) REFERENCES `Utilisateurs` (`Email`),
   ADD CONSTRAINT `UtilisateursAllergies_ibfk_2` FOREIGN KEY (`Allergie`) REFERENCES `Allergies` (`Nom`);
 
 --
--- Contraintes pour la table `UtilisateursRestrictions`
+-- Constraints for table `UtilisateursRestrictions`
 --
 ALTER TABLE `UtilisateursRestrictions`
   ADD CONSTRAINT `UtilisateursRestrictions_ibfk_1` FOREIGN KEY (`Utilisateur`) REFERENCES `Utilisateurs` (`Email`),
