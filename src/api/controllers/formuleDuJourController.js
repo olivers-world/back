@@ -69,6 +69,29 @@ exports.getFormuleDuJour = (req, res) => {
   });
 };
 
+exports.getMenuIDFormuleDuJour = (req, res) => {
+  const today = dayjs().format('YYYY-MM-DD');
+
+  const getFormuleDuJourQuery = `
+    SELECT MenuID
+    FROM FormuleDuJour
+    WHERE Date = ?
+  `;
+
+  db.query(getFormuleDuJourQuery, [today], (err, results) => {
+    if (err) {
+      return res.status(500).json({ message: "Database error", error: err });
+    } else {
+      if (results.length === 0) {
+        // Si aucune formule du jour n'est trouvée, renvoyer une réponse vide avec un code de succès 200
+        return res.status(200).json({ menuID: null });
+      }
+      const formuleDuJour = results[0]; // Assuming only one formule du jour for today
+      const menuID = formuleDuJour.MenuID;
+      return res.status(200).json({ menuID });
+    }
+  });
+};
 
 
 exports.updateFormuleDuJour = (req, res) => {

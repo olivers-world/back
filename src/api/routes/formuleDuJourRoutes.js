@@ -4,6 +4,7 @@ const formuleDuJourController = require("../controllers/formuleDuJourController"
 
 router.post("/create", formuleDuJourController.createFormuleDuJour);
 router.get("/get", formuleDuJourController.getFormuleDuJour);
+router.get("/getId", formuleDuJourController.getMenuIDFormuleDuJour);
 router.put("/update", formuleDuJourController.updateFormuleDuJour);
 router.delete("/delete", formuleDuJourController.deleteFormuleDuJour);
 
