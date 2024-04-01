@@ -5,6 +5,8 @@ require("dotenv").config();
 const authRoutes = require("./src/api/routes/authRoutes");
 const reservationRoutes = require("./src/api/routes/reservationRoutes.js");
 const inventaireRoutes = require("./src/api/routes/inventaireRoutes.js");
+const platRoutes = require("./src/api/routes/platRoutes.js");
+const menuRoutes = require("./src/api/routes/menuRoutes.js");
 const nettoyageRoutes = require("./src/api/routes/nettoyageRoutes.js");
 const logoutRoutes = require("./src/api/routes/logoutRoutes.js");
 const refreshRoutes = require("./src/api/routes/refreshRoutes.js");
@@ -23,6 +25,8 @@ app.use(express.json());
 // Utilisation des routes d'authentification
 app.use("/api/auth", authRoutes);
 app.use("/api/reservation", reservationRoutes);
+app.use("/api/plat", platRoutes);
+app.use("/api/menu", menuRoutes);
 app.use("/api/inventaire", inventaireRoutes);
 app.use("/api/nettoyage", nettoyageRoutes);
 app.use("/api/logout", logoutRoutes);
