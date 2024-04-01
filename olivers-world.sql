@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 01, 2024 at 04:26 AM
+-- Generation Time: Apr 01, 2024 at 07:29 AM
 -- Server version: 11.3.2-MariaDB
 -- PHP Version: 8.3.4
 
@@ -71,6 +71,24 @@ INSERT INTO `Allergies` (`Nom`) VALUES
 ('Poissons'),
 ('Soja'),
 ('Sulfites');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `FormuleDuJour`
+--
+
+CREATE TABLE `FormuleDuJour` (
+  `Date` date NOT NULL,
+  `Menu` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `FormuleDuJour`
+--
+
+INSERT INTO `FormuleDuJour` (`Date`, `Menu`) VALUES
+('2024-04-01', 'Voyage en Mer');
 
 -- --------------------------------------------------------
 
@@ -317,24 +335,24 @@ CREATE TABLE `Plats` (
 --
 
 INSERT INTO `Plats` (`Nom`, `Prix`, `Types`) VALUES
-('Boeuf Bourguignon', 22.00, 'Plats principaux'),
-('Bouillabaisse', 18.00, 'Fruits de mer'),
-('Cassoulet', 20.00, 'Plats principaux'),
-('Ceviche', 17.00, 'Fruits de mer'),
+('Boeuf Bourguignon', 22.00, 'Plats'),
+('Bouillabaisse', 18.00, 'Plats'),
+('Cassoulet', 20.00, 'Plats'),
+('Ceviche', 17.00, 'Entrées'),
 ('Crème Brûlée', 10.00, 'Desserts'),
-('Falafel Wrap', 11.00, 'Plats végétaliens'),
-('Gazpacho', 8.00, 'Soupes'),
-('Margherita Pizza', 10.00, 'Pizzas'),
-('Moules Marinières', 16.00, 'Fruits de mer'),
-('Paella', 19.00, 'Plats principaux'),
+('Falafel Wrap', 11.00, 'Entrées'),
+('Gazpacho', 8.00, 'Entrées'),
+('Margherita Pizza', 10.00, 'Plats'),
+('Moules Marinières', 16.00, 'Plats'),
+('Paella', 19.00, 'Plats'),
 ('Quiche Lorraine', 14.00, 'Entrées'),
-('Ratatouille', 12.00, 'Plats végétariens'),
-('Ravioli Ricotta e Spinaci', 13.00, 'Pâtes'),
-('Risotto aux Champignons', 14.00, 'Plats principaux'),
-('Salade de Quinoa', 12.00, 'Plats végétariens'),
-('Salade Niçoise', 13.00, 'Salades'),
-('Sangria', 7.00, 'Boissons alcoolisées'),
-('Spaghetti Carbonara', 15.00, 'Pâtes'),
+('Ratatouille', 12.00, 'Entrées'),
+('Ravioli Ricotta e Spinaci', 13.00, 'Plats'),
+('Risotto aux Champignons', 14.00, 'Plats'),
+('Salade de Quinoa', 12.00, 'Entrées'),
+('Salade Niçoise', 13.00, 'Entrées'),
+('Sangria', 7.00, 'Boissons'),
+('Spaghetti Carbonara', 15.00, 'Plats'),
 ('Tarte Tatin', 9.00, 'Desserts'),
 ('Tiramisu', 11.00, 'Desserts');
 
@@ -640,6 +658,7 @@ CREATE TABLE `TypesPlats` (
 
 INSERT INTO `TypesPlats` (`Nom`) VALUES
 ('Amuse-bouches'),
+('Boissons'),
 ('Boissons alcoolisées'),
 ('Boissons non alcoolisées'),
 ('Desserts'),
@@ -648,6 +667,7 @@ INSERT INTO `TypesPlats` (`Nom`) VALUES
 ('Grillades'),
 ('Pâtes'),
 ('Pizzas'),
+('Plats'),
 ('Plats principaux'),
 ('Plats végétaliens'),
 ('Plats végétariens'),
@@ -728,6 +748,13 @@ ALTER TABLE `AdditionsPlats`
 --
 ALTER TABLE `Allergies`
   ADD PRIMARY KEY (`Nom`);
+
+--
+-- Indexes for table `FormuleDuJour`
+--
+ALTER TABLE `FormuleDuJour`
+  ADD PRIMARY KEY (`Date`),
+  ADD KEY `Menu` (`Menu`);
 
 --
 -- Indexes for table `Ingredients`
@@ -899,6 +926,12 @@ ALTER TABLE `Additions`
 ALTER TABLE `AdditionsPlats`
   ADD CONSTRAINT `AdditionsPlats_ibfk_1` FOREIGN KEY (`Plat`) REFERENCES `Plats` (`Nom`),
   ADD CONSTRAINT `AdditionsPlats_ibfk_2` FOREIGN KEY (`Addition`) REFERENCES `Additions` (`ID`);
+
+--
+-- Constraints for table `FormuleDuJour`
+--
+ALTER TABLE `FormuleDuJour`
+  ADD CONSTRAINT `FormuleDuJour_ibfk_1` FOREIGN KEY (`Menu`) REFERENCES `Menus` (`Menu`);
 
 --
 -- Constraints for table `Ingredients`
