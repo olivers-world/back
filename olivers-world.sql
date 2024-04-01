@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 01, 2024 at 07:29 AM
+-- Generation Time: Apr 01, 2024 at 10:43 AM
 -- Server version: 11.3.2-MariaDB
 -- PHP Version: 8.3.4
 
@@ -80,15 +80,15 @@ INSERT INTO `Allergies` (`Nom`) VALUES
 
 CREATE TABLE `FormuleDuJour` (
   `Date` date NOT NULL,
-  `Menu` varchar(255) NOT NULL
+  `MenuID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `FormuleDuJour`
 --
 
-INSERT INTO `FormuleDuJour` (`Date`, `Menu`) VALUES
-('2024-04-01', 'Voyage en Mer');
+INSERT INTO `FormuleDuJour` (`Date`, `MenuID`) VALUES
+('2024-04-01', 3);
 
 -- --------------------------------------------------------
 
@@ -248,6 +248,7 @@ INSERT INTO `Inventaires` (`ID`, `Date`, `Fait`) VALUES
 --
 
 CREATE TABLE `Menus` (
+  `ID` int(11) NOT NULL,
   `Menu` varchar(255) NOT NULL,
   `Prix` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -256,10 +257,10 @@ CREATE TABLE `Menus` (
 -- Dumping data for table `Menus`
 --
 
-INSERT INTO `Menus` (`Menu`, `Prix`) VALUES
-('Classiques du Bistrot', 20.00),
-('Végétarien Gourmand', 20.00),
-('Voyage en Mer', 20.00);
+INSERT INTO `Menus` (`ID`, `Menu`, `Prix`) VALUES
+(1, 'Classiques du Bistrot', 20.00),
+(2, 'Végétarien Gourmand', 20.00),
+(3, 'Voyage en Mer', 20.00);
 
 -- --------------------------------------------------------
 
@@ -268,31 +269,43 @@ INSERT INTO `Menus` (`Menu`, `Prix`) VALUES
 --
 
 CREATE TABLE `MenusPlats` (
-  `Menu` varchar(255) NOT NULL,
-  `Plat` varchar(255) NOT NULL
+  `MenuID` int(11) NOT NULL,
+  `PlatID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `MenusPlats`
 --
 
-INSERT INTO `MenusPlats` (`Menu`, `Plat`) VALUES
-('Classiques du Bistrot', 'Boeuf Bourguignon'),
-('Voyage en Mer', 'Bouillabaisse'),
-('Classiques du Bistrot', 'Cassoulet'),
-('Voyage en Mer', 'Ceviche'),
-('Classiques du Bistrot', 'Crème Brûlée'),
-('Végétarien Gourmand', 'Falafel Wrap'),
-('Végétarien Gourmand', 'Gazpacho'),
-('Voyage en Mer', 'Moules Marinières'),
-('Classiques du Bistrot', 'Quiche Lorraine'),
-('Classiques du Bistrot', 'Ratatouille'),
-('Végétarien Gourmand', 'Ratatouille'),
-('Végétarien Gourmand', 'Salade de Quinoa'),
-('Végétarien Gourmand', 'Salade Niçoise'),
-('Classiques du Bistrot', 'Sangria'),
-('Voyage en Mer', 'Tarte Tatin'),
-('Végétarien Gourmand', 'Tiramisu');
+INSERT INTO `MenusPlats` (`MenuID`, `PlatID`) VALUES
+(1, 1),
+(3, 2),
+(1, 3),
+(3, 4),
+(1, 5),
+(2, 6),
+(3, 9),
+(1, 11),
+(1, 12),
+(2, 12),
+(2, 15),
+(1, 17),
+(3, 19),
+(2, 20),
+(1, 1),
+(3, 2),
+(1, 3),
+(3, 4),
+(1, 5),
+(2, 6),
+(3, 9),
+(1, 11),
+(1, 12),
+(2, 12),
+(2, 15),
+(1, 17),
+(3, 19),
+(2, 20);
 
 -- --------------------------------------------------------
 
@@ -325,6 +338,7 @@ INSERT INTO `Nettoyages` (`ID`, `Date`, `Fait`) VALUES
 --
 
 CREATE TABLE `Plats` (
+  `ID` int(11) NOT NULL,
   `Nom` varchar(255) NOT NULL,
   `Prix` decimal(10,2) NOT NULL,
   `Types` varchar(255) DEFAULT NULL
@@ -334,27 +348,26 @@ CREATE TABLE `Plats` (
 -- Dumping data for table `Plats`
 --
 
-INSERT INTO `Plats` (`Nom`, `Prix`, `Types`) VALUES
-('Boeuf Bourguignon', 22.00, 'Plats'),
-('Bouillabaisse', 18.00, 'Plats'),
-('Cassoulet', 20.00, 'Plats'),
-('Ceviche', 17.00, 'Entrées'),
-('Crème Brûlée', 10.00, 'Desserts'),
-('Falafel Wrap', 11.00, 'Entrées'),
-('Gazpacho', 8.00, 'Entrées'),
-('Margherita Pizza', 10.00, 'Plats'),
-('Moules Marinières', 16.00, 'Plats'),
-('Paella', 19.00, 'Plats'),
-('Quiche Lorraine', 14.00, 'Entrées'),
-('Ratatouille', 12.00, 'Entrées'),
-('Ravioli Ricotta e Spinaci', 13.00, 'Plats'),
-('Risotto aux Champignons', 14.00, 'Plats'),
-('Salade de Quinoa', 12.00, 'Entrées'),
-('Salade Niçoise', 13.00, 'Entrées'),
-('Sangria', 7.00, 'Boissons'),
-('Spaghetti Carbonara', 15.00, 'Plats'),
-('Tarte Tatin', 9.00, 'Desserts'),
-('Tiramisu', 11.00, 'Desserts');
+INSERT INTO `Plats` (`ID`, `Nom`, `Prix`, `Types`) VALUES
+(1, 'Boeuf Bourguignon', 22.00, 'Plats'),
+(2, 'Bouillabaisse', 18.00, 'Plats'),
+(3, 'Cassoulet', 20.00, 'Plats'),
+(4, 'Ceviche', 17.00, 'Entrées'),
+(5, 'Crème Brûlée', 10.00, 'Desserts'),
+(6, 'Falafel Wrap', 11.00, 'Entrées'),
+(8, 'Margherita Pizza', 10.00, 'Plats'),
+(9, 'Moules Marinières', 16.00, 'Plats'),
+(10, 'Paella', 19.00, 'Plats'),
+(11, 'Quiche Lorraine', 500.00, 'Entrées'),
+(12, 'Ratatouille', 12.00, 'Entrées'),
+(13, 'Ravioli Ricotta e Spinaci', 13.00, 'Plats'),
+(14, 'Risotto aux Champignons', 14.00, 'Plats'),
+(15, 'Salade de Quinoa', 12.00, 'Entrées'),
+(17, 'Sangria', 7.00, 'Boissons'),
+(18, 'Spaghetti Carbonara', 15.00, 'Plats'),
+(19, 'Tarte Tatin', 9.00, 'Desserts'),
+(20, 'Tiramisu', 11.00, 'Desserts'),
+(21, 'Salade Nicoise', 20.00, 'Entrées');
 
 -- --------------------------------------------------------
 
@@ -657,23 +670,10 @@ CREATE TABLE `TypesPlats` (
 --
 
 INSERT INTO `TypesPlats` (`Nom`) VALUES
-('Amuse-bouches'),
 ('Boissons'),
-('Boissons alcoolisées'),
-('Boissons non alcoolisées'),
 ('Desserts'),
 ('Entrées'),
-('Fruits de mer'),
-('Grillades'),
-('Pâtes'),
-('Pizzas'),
-('Plats'),
-('Plats principaux'),
-('Plats végétaliens'),
-('Plats végétariens'),
-('Salades'),
-('Soupes'),
-('Tapas');
+('Plats');
 
 -- --------------------------------------------------------
 
@@ -754,7 +754,7 @@ ALTER TABLE `Allergies`
 --
 ALTER TABLE `FormuleDuJour`
   ADD PRIMARY KEY (`Date`),
-  ADD KEY `Menu` (`Menu`);
+  ADD KEY `MenuID` (`MenuID`);
 
 --
 -- Indexes for table `Ingredients`
@@ -774,14 +774,15 @@ ALTER TABLE `Inventaires`
 -- Indexes for table `Menus`
 --
 ALTER TABLE `Menus`
-  ADD PRIMARY KEY (`Menu`);
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `Menu` (`Menu`);
 
 --
 -- Indexes for table `MenusPlats`
 --
 ALTER TABLE `MenusPlats`
-  ADD PRIMARY KEY (`Menu`,`Plat`),
-  ADD KEY `Plat` (`Plat`);
+  ADD KEY `fk_MenuID` (`MenuID`),
+  ADD KEY `fk_PlatID` (`PlatID`);
 
 --
 -- Indexes for table `Nettoyages`
@@ -794,7 +795,7 @@ ALTER TABLE `Nettoyages`
 -- Indexes for table `Plats`
 --
 ALTER TABLE `Plats`
-  ADD PRIMARY KEY (`Nom`),
+  ADD PRIMARY KEY (`ID`),
   ADD KEY `Types` (`Types`);
 
 --
@@ -890,13 +891,25 @@ ALTER TABLE `Additions`
 -- AUTO_INCREMENT for table `Inventaires`
 --
 ALTER TABLE `Inventaires`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+
+--
+-- AUTO_INCREMENT for table `Menus`
+--
+ALTER TABLE `Menus`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `Nettoyages`
 --
 ALTER TABLE `Nettoyages`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+
+--
+-- AUTO_INCREMENT for table `Plats`
+--
+ALTER TABLE `Plats`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `Reservations`
@@ -924,14 +937,13 @@ ALTER TABLE `Additions`
 -- Constraints for table `AdditionsPlats`
 --
 ALTER TABLE `AdditionsPlats`
-  ADD CONSTRAINT `AdditionsPlats_ibfk_1` FOREIGN KEY (`Plat`) REFERENCES `Plats` (`Nom`),
   ADD CONSTRAINT `AdditionsPlats_ibfk_2` FOREIGN KEY (`Addition`) REFERENCES `Additions` (`ID`);
 
 --
 -- Constraints for table `FormuleDuJour`
 --
 ALTER TABLE `FormuleDuJour`
-  ADD CONSTRAINT `FormuleDuJour_ibfk_1` FOREIGN KEY (`Menu`) REFERENCES `Menus` (`Menu`);
+  ADD CONSTRAINT `FormuleDuJour_ibfk_1` FOREIGN KEY (`MenuID`) REFERENCES `Menus` (`ID`);
 
 --
 -- Constraints for table `Ingredients`
@@ -943,8 +955,8 @@ ALTER TABLE `Ingredients`
 -- Constraints for table `MenusPlats`
 --
 ALTER TABLE `MenusPlats`
-  ADD CONSTRAINT `MenusPlats_ibfk_1` FOREIGN KEY (`Menu`) REFERENCES `Menus` (`Menu`),
-  ADD CONSTRAINT `MenusPlats_ibfk_2` FOREIGN KEY (`Plat`) REFERENCES `Plats` (`Nom`);
+  ADD CONSTRAINT `fk_MenuID` FOREIGN KEY (`MenuID`) REFERENCES `Menus` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_PlatID` FOREIGN KEY (`PlatID`) REFERENCES `Plats` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `Plats`
@@ -956,7 +968,6 @@ ALTER TABLE `Plats`
 -- Constraints for table `PlatsIngredients`
 --
 ALTER TABLE `PlatsIngredients`
-  ADD CONSTRAINT `PlatsIngredients_ibfk_1` FOREIGN KEY (`Plat`) REFERENCES `Plats` (`Nom`),
   ADD CONSTRAINT `PlatsIngredients_ibfk_2` FOREIGN KEY (`Ingredients`) REFERENCES `Ingredients` (`Nom`);
 
 --
