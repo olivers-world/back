@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 31, 2024 at 01:16 PM
+-- Generation Time: Apr 01, 2024 at 04:26 AM
 -- Server version: 11.3.2-MariaDB
 -- PHP Version: 8.3.4
 
@@ -204,24 +204,24 @@ INSERT INTO `Ingredients` (`Nom`, `Type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Inventaire`
+-- Table structure for table `Inventaires`
 --
 
-CREATE TABLE `Inventaire` (
+CREATE TABLE `Inventaires` (
   `ID` int(11) NOT NULL,
   `Date` date NOT NULL,
   `Fait` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `Inventaire`
+-- Dumping data for table `Inventaires`
 --
 
-INSERT INTO `Inventaire` (`ID`, `Date`, `Fait`) VALUES
+INSERT INTO `Inventaires` (`ID`, `Date`, `Fait`) VALUES
 (1, '2024-03-06', 1),
 (2, '2024-03-20', 1),
-(3, '2024-04-03', 1),
-(4, '2024-04-10', 0);
+(4, '2024-04-10', 0),
+(52, '2024-04-05', 0);
 
 -- --------------------------------------------------------
 
@@ -279,26 +279,26 @@ INSERT INTO `MenusPlats` (`Menu`, `Plat`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Nettoyage`
+-- Table structure for table `Nettoyages`
 --
 
-CREATE TABLE `Nettoyage` (
+CREATE TABLE `Nettoyages` (
   `ID` int(11) NOT NULL,
   `Date` date NOT NULL,
   `Fait` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `Nettoyage`
+-- Dumping data for table `Nettoyages`
 --
 
-INSERT INTO `Nettoyage` (`ID`, `Date`, `Fait`) VALUES
+INSERT INTO `Nettoyages` (`ID`, `Date`, `Fait`) VALUES
 (1, '2024-03-04', 1),
 (2, '2024-03-11', 1),
 (3, '2024-03-18', 1),
 (4, '2024-03-25', 1),
-(5, '2024-04-01', 1),
-(6, '2024-04-08', 0);
+(6, '2024-04-08', 0),
+(45, '2024-04-07', 0);
 
 -- --------------------------------------------------------
 
@@ -484,7 +484,9 @@ INSERT INTO `Reservations` (`ID`, `Email`, `Nom`, `DateHeure`, `NbPersonnes`, `S
 (80, 'dfdfdf', 'ddfdf', '2024-03-30 12:15:00', 1, 'Prise'),
 (82, 'aaaaa', 'jjjj', '2024-03-30 12:25:00', 1, 'Prise'),
 (91, 'djej@djej.djej', 'djejdj', '2024-04-11 12:00:00', 3, 'Prise'),
-(92, 'djej@djej.djej', 'DjejOO', '2024-03-31 18:00:00', 4, 'Prise');
+(92, 'djej@djej.djej', 'DjejOO', '2024-03-31 18:00:00', 4, 'Prise'),
+(93, 'djej@djej.djej', 'Djej', '2024-04-01 12:00:00', 1, 'Prise'),
+(95, 'djej@djej.djej', 'Djej', '2024-04-01 12:05:00', 1, 'Prise');
 
 -- --------------------------------------------------------
 
@@ -735,10 +737,11 @@ ALTER TABLE `Ingredients`
   ADD KEY `Type` (`Type`);
 
 --
--- Indexes for table `Inventaire`
+-- Indexes for table `Inventaires`
 --
-ALTER TABLE `Inventaire`
-  ADD PRIMARY KEY (`ID`);
+ALTER TABLE `Inventaires`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `Date` (`Date`);
 
 --
 -- Indexes for table `Menus`
@@ -754,10 +757,11 @@ ALTER TABLE `MenusPlats`
   ADD KEY `Plat` (`Plat`);
 
 --
--- Indexes for table `Nettoyage`
+-- Indexes for table `Nettoyages`
 --
-ALTER TABLE `Nettoyage`
-  ADD PRIMARY KEY (`ID`);
+ALTER TABLE `Nettoyages`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `Date` (`Date`);
 
 --
 -- Indexes for table `Plats`
@@ -856,22 +860,22 @@ ALTER TABLE `Additions`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `Inventaire`
+-- AUTO_INCREMENT for table `Inventaires`
 --
-ALTER TABLE `Inventaire`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `Inventaires`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
--- AUTO_INCREMENT for table `Nettoyage`
+-- AUTO_INCREMENT for table `Nettoyages`
 --
-ALTER TABLE `Nettoyage`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+ALTER TABLE `Nettoyages`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `Reservations`
 --
 ALTER TABLE `Reservations`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT for table `Tables`
