@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 01, 2024 at 10:43 AM
+-- Generation Time: Apr 01, 2024 at 05:47 PM
 -- Server version: 11.3.2-MariaDB
 -- PHP Version: 8.3.4
 
@@ -88,7 +88,7 @@ CREATE TABLE `FormuleDuJour` (
 --
 
 INSERT INTO `FormuleDuJour` (`Date`, `MenuID`) VALUES
-('2024-04-01', 3);
+('2024-04-01', 2);
 
 -- --------------------------------------------------------
 
@@ -258,9 +258,10 @@ CREATE TABLE `Menus` (
 --
 
 INSERT INTO `Menus` (`ID`, `Menu`, `Prix`) VALUES
-(1, 'Classiques du Bistrot', 20.00),
+(1, 'Classiques du Bistrot', 32.00),
 (2, 'Végétarien Gourmand', 20.00),
-(3, 'Voyage en Mer', 20.00);
+(3, 'Voyage en Mer', 16.00),
+(4, 'Djej', 20.00);
 
 -- --------------------------------------------------------
 
@@ -278,34 +279,25 @@ CREATE TABLE `MenusPlats` (
 --
 
 INSERT INTO `MenusPlats` (`MenuID`, `PlatID`) VALUES
-(1, 1),
-(3, 2),
-(1, 3),
-(3, 4),
-(1, 5),
 (2, 6),
-(3, 9),
-(1, 11),
-(1, 12),
 (2, 12),
 (2, 15),
-(1, 17),
-(3, 19),
 (2, 20),
-(1, 1),
-(3, 2),
-(1, 3),
-(3, 4),
-(1, 5),
 (2, 6),
-(3, 9),
-(1, 11),
-(1, 12),
 (2, 12),
 (2, 15),
-(1, 17),
+(2, 20),
+(3, 4),
+(3, 4),
+(3, 2),
+(3, 9),
+(3, 2),
+(3, 9),
 (3, 19),
-(2, 20);
+(3, 19),
+(1, 18),
+(1, 14),
+(1, 13);
 
 -- --------------------------------------------------------
 
@@ -516,8 +508,7 @@ INSERT INTO `Reservations` (`ID`, `Email`, `Nom`, `DateHeure`, `NbPersonnes`, `S
 (82, 'aaaaa', 'jjjj', '2024-03-30 12:25:00', 1, 'Prise'),
 (91, 'djej@djej.djej', 'djejdj', '2024-04-11 12:00:00', 3, 'Prise'),
 (92, 'djej@djej.djej', 'DjejOO', '2024-03-31 18:00:00', 4, 'Prise'),
-(93, 'djej@djej.djej', 'Djej', '2024-04-01 12:00:00', 1, 'Prise'),
-(95, 'djej@djej.djej', 'Djej', '2024-04-01 12:05:00', 1, 'Prise');
+(93, 'djej@djej.djej', 'Djej', '2024-04-01 12:00:00', 1, 'Prise');
 
 -- --------------------------------------------------------
 
@@ -897,7 +888,7 @@ ALTER TABLE `Inventaires`
 -- AUTO_INCREMENT for table `Menus`
 --
 ALTER TABLE `Menus`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `Nettoyages`
