@@ -4,6 +4,7 @@ const platController = require("../controllers/platController");
 
 router.post("/create", platController.createPlats);
 router.get("/get", platController.getPlats);
+router.get("/getByTypes", platController.getPlatsByTypes);
 router.put("/update", platController.updatePlats);
 router.delete("/delete", platController.deletePlats);
 

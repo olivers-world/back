@@ -39,6 +39,28 @@ exports.getPlats = (req, res) => {
   });
 };
 
+exports.getPlatsByTypes = (req, res) => {
+  const getPlatsQuery = `SELECT * FROM Plats`;
+
+  db.query(getPlatsQuery, (err, results) => {
+    if (err) {
+      return res.status(500).json({ message: "Database error", error: err });
+    } else {
+      // Group by types
+      const categorizedPlats = results.reduce((acc, current) => {
+        const { Types, ...platData } = current;
+        if (!acc[Types]) {
+          acc[Types] = [];
+        }
+        acc[Types].push(platData);
+        return acc;
+      }, {});
+
+      return res.status(200).json(categorizedPlats);
+    }
+  });
+};
+
 exports.updatePlats = (req, res) => {
   const { nom, newNom, newPrix, newTypes } = req.body;
 
