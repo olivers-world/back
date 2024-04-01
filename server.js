@@ -10,6 +10,7 @@ const menuRoutes = require("./src/api/routes/menuRoutes.js");
 const nettoyageRoutes = require("./src/api/routes/nettoyageRoutes.js");
 const logoutRoutes = require("./src/api/routes/logoutRoutes.js");
 const refreshRoutes = require("./src/api/routes/refreshRoutes.js");
+const formuleDuJourRoutes = require("./src/api/routes/formuleDuJourRoutes.js");
 
 const app = express();
 const port = process.env.PORT;
@@ -27,6 +28,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/reservation", reservationRoutes);
 app.use("/api/plat", platRoutes);
 app.use("/api/menu", menuRoutes);
+app.use("/api/formuleDuJour", formuleDuJourRoutes);
 app.use("/api/inventaire", inventaireRoutes);
 app.use("/api/nettoyage", nettoyageRoutes);
 app.use("/api/logout", logoutRoutes);
