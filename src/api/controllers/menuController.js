@@ -27,27 +27,28 @@ exports.createMenu = (req, res) => {
 
 exports.getMenusWithPlats = (req, res) => {
   const getMenusWithPlatsQuery = `
-    SELECT Menus.Menu, Menus.Prix, Plats.Nom AS Plat, Plats.Prix AS PlatPrix, Plats.Types
+    SELECT Menus.ID, Menus.Menu, Menus.Prix, Plats.ID AS PlatID, Plats.Nom AS Plat, Plats.Prix AS PlatPrix, Plats.Types
     FROM Menus
-    INNER JOIN MenusPlats ON Menus.Menu = MenusPlats.Menu
-    INNER JOIN Plats ON MenusPlats.Plat = Plats.Nom
+    INNER JOIN MenusPlats ON Menus.ID = MenusPlats.MenuID
+    INNER JOIN Plats ON MenusPlats.PlatID = Plats.ID
   `;
 
   db.query(getMenusWithPlatsQuery, (err, results) => {
     if (err) {
       return res.status(500).json({ message: "Database error", error: err });
     } else {
-      // Group by menu
       const menus = {};
       results.forEach((row) => {
-        if (!menus[row.Menu]) {
-          menus[row.Menu] = {
+        if (!menus[row.ID]) {
+          menus[row.ID] = {
+            ID: row.ID,
             Menu: row.Menu,
             Prix: row.Prix,
             Plats: [],
           };
         }
-        menus[row.Menu].Plats.push({
+        menus[row.ID].Plats.push({
+          ID: row.PlatID,
           Nom: row.Plat,
           Prix: row.PlatPrix,
           Types: row.Types,
@@ -59,9 +60,9 @@ exports.getMenusWithPlats = (req, res) => {
 };
 
 exports.updateMenu = (req, res) => {
-  const { menu, newMenu, newPrix } = req.body;
+  const { id, newMenu, newPrix } = req.body;
 
-  if (!(menu && (newMenu || newPrix))) {
+  if (!(id && (newMenu || newPrix))) {
     return res.status(400).json({ message: "Missing data for update" });
   }
 
@@ -78,8 +79,8 @@ exports.updateMenu = (req, res) => {
   }
 
   updateQuery = updateQuery.slice(0, -2); // Removes the trailing comma and space
-  updateQuery += ` WHERE Menu = ?`;
-  queryParams.push(menu);
+  updateQuery += ` WHERE ID = ?`;
+  queryParams.push(id);
 
   db.query(updateQuery, queryParams, (err, result) => {
     if (err) {
@@ -93,15 +94,15 @@ exports.updateMenu = (req, res) => {
 };
 
 exports.deleteMenu = (req, res) => {
-  const { menu } = req.body;
+  const { id } = req.body;
 
-  if (!menu) {
-    return res.status(400).json({ message: "Menu identifier is required" });
+  if (!id) {
+    return res.status(400).json({ message: "Menu ID is required" });
   }
 
-  const deleteMenuQuery = `DELETE FROM Menus WHERE Menu = ?`;
+  const deleteMenuQuery = `DELETE FROM Menus WHERE ID = ?`;
 
-  db.query(deleteMenuQuery, [menu], (err, result) => {
+  db.query(deleteMenuQuery, [id], (err, result) => {
     if (err) {
       return res.status(500).json({ message: "Database error", error: err });
     } else if (result.affectedRows === 0) {

@@ -3,20 +3,20 @@ const db = require("../../config/db.js");
 const dayjs = require('dayjs');
 
 exports.createFormuleDuJour = (req, res) => {
-  const { menu, date } = req.body;
+  const { menuID, date } = req.body; // Use menuID instead of menu
 
-  if (!menu) {
-    return res.status(400).json({ message: "Menu identifier is required" });
+  if (!menuID) {
+    return res.status(400).json({ message: "Menu ID is required" });
   }
 
   const formattedDate = date ? dayjs(date).format('YYYY-MM-DD') : dayjs().format('YYYY-MM-DD');
 
   const createFormuleDuJourQuery = `
-    INSERT INTO FormuleDuJour (Menu, Date)
+    INSERT INTO FormuleDuJour (MenuID, Date)
     VALUES (?, ?)
-  `;
+  `; // Use MenuID column
 
-  db.query(createFormuleDuJourQuery, [menu, formattedDate], (err, result) => {
+  db.query(createFormuleDuJourQuery, [menuID, formattedDate], (err, result) => {
     if (err) {
       return res.status(500).json({ message: "Database error", error: err });
     } else {
@@ -31,13 +31,13 @@ exports.getFormuleDuJour = (req, res) => {
   const today = dayjs().format('YYYY-MM-DD');
 
   const getFormuleDuJourQuery = `
-    SELECT Menus.Menu, Menus.Prix, Plats.Nom AS Plat, Plats.Prix AS PlatPrix, Plats.Types
+    SELECT Menus.ID, Menus.Menu, Menus.Prix, Plats.ID AS PlatID, Plats.Nom AS Plat, Plats.Prix AS PlatPrix, Plats.Types
     FROM FormuleDuJour
-    INNER JOIN Menus ON FormuleDuJour.Menu = Menus.Menu
-    INNER JOIN MenusPlats ON Menus.Menu = MenusPlats.Menu
-    INNER JOIN Plats ON MenusPlats.Plat = Plats.Nom
+    INNER JOIN Menus ON FormuleDuJour.MenuID = Menus.ID
+    INNER JOIN MenusPlats ON Menus.ID = MenusPlats.MenuID
+    INNER JOIN Plats ON MenusPlats.PlatID = Plats.ID
     WHERE FormuleDuJour.Date = ?
-  `;
+  `; // Adjusted to work with ID relationships
 
   db.query(getFormuleDuJourQuery, [today], (err, results) => {
     if (err) {
@@ -46,35 +46,41 @@ exports.getFormuleDuJour = (req, res) => {
       if (results.length === 0) {
         return res.status(404).json({ message: "No Formule du Jour for today" });
       }
-      const menu = {
-        Menu: results[0].Menu,
-        Prix: results[0].Prix,
-        Plats: results.map(({ Plat, PlatPrix, Types }) => ({
-          Nom: Plat,
-          Prix: PlatPrix,
-          Types
-        }))
-      };
+      // Transform results to grouped by menu structure
+      const menu = results.reduce((acc, cur) => {
+        acc.Menu = cur.Menu;
+        acc.Prix = cur.Prix;
+        acc.Plats = acc.Plats || [];
+        acc.Plats.push({
+          ID: cur.PlatID,
+          Nom: cur.Plat,
+          Prix: cur.PlatPrix,
+          Types: cur.Types
+        });
+        return acc;
+      }, {});
+
       return res.status(200).json(menu);
     }
   });
 };
 
 
+
 exports.updateFormuleDuJour = (req, res) => {
-  const { menu, newMenu, newDate } = req.body;
+  const { menuID, newMenuID, newDate } = req.body;
   const today = dayjs().format('YYYY-MM-DD');
 
-  if (!(menu && (newMenu || newDate))) {
+  if (!(menuID && (newMenuID || newDate))) {
     return res.status(400).json({ message: "Missing data for update" });
   }
 
   let updateQuery = `UPDATE FormuleDuJour SET `;
   const queryParams = [];
 
-  if (newMenu) {
-    updateQuery += `Menu = ?, `;
-    queryParams.push(newMenu);
+  if (newMenuID) {
+    updateQuery += `MenuID = ?, `;
+    queryParams.push(newMenuID);
   }
   if (newDate) {
     const formattedNewDate = dayjs(newDate).format('YYYY-MM-DD');
@@ -83,8 +89,8 @@ exports.updateFormuleDuJour = (req, res) => {
   }
 
   updateQuery = updateQuery.slice(0, -2); // Removes the trailing comma and space
-  updateQuery += ` WHERE Menu = ? AND Date = ?`;
-  queryParams.push(menu, today);
+  updateQuery += ` WHERE MenuID = ? AND Date = ?`;
+  queryParams.push(menuID, today);
 
   db.query(updateQuery, queryParams, (err, result) => {
     if (err) {
@@ -98,16 +104,16 @@ exports.updateFormuleDuJour = (req, res) => {
 };
 
 exports.deleteFormuleDuJour = (req, res) => {
-  const { menu } = req.body;
+  const { menuID } = req.body;
   const today = dayjs().format('YYYY-MM-DD');
 
-  if (!menu) {
-    return res.status(400).json({ message: "Menu identifier is required for deletion" });
+  if (!menuID) {
+    return res.status(400).json({ message: "Menu ID is required for deletion" });
   }
 
-  const deleteFormuleDuJourQuery = `DELETE FROM FormuleDuJour WHERE Menu = ? AND Date = ?`;
+  const deleteFormuleDuJourQuery = `DELETE FROM FormuleDuJour WHERE MenuID = ? AND Date = ?`;
 
-  db.query(deleteFormuleDuJourQuery, [menu, today], (err, result) => {
+  db.query(deleteFormuleDuJourQuery, [menuID, today], (err, result) => {
     if (err) {
       return res.status(500).json({ message: "Database error", error: err });
     } else if (result.affectedRows === 0) {

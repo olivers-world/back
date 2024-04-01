@@ -46,13 +46,13 @@ exports.getPlatsByTypes = (req, res) => {
     if (err) {
       return res.status(500).json({ message: "Database error", error: err });
     } else {
-      // Group by types
+      // Group by types without removing the Types property from platData
       const categorizedPlats = results.reduce((acc, current) => {
-        const { Types, ...platData } = current;
+        const { Types } = current;
         if (!acc[Types]) {
           acc[Types] = [];
         }
-        acc[Types].push(platData);
+        acc[Types].push(current); // Keep the entire object, including its Types
         return acc;
       }, {});
 
@@ -62,9 +62,9 @@ exports.getPlatsByTypes = (req, res) => {
 };
 
 exports.updatePlats = (req, res) => {
-  const { nom, newNom, newPrix, newTypes } = req.body;
+  const { id, newNom, newPrix, newTypes } = req.body;
 
-  if (!(nom && newNom && newPrix)) {
+  if (!(id && (newNom || newPrix || newTypes))) {
     return res.status(400).json({ message: "Missing data for update" });
   }
 
@@ -85,36 +85,36 @@ exports.updatePlats = (req, res) => {
   }
 
   updateQuery = updateQuery.slice(0, -2);
-  updateQuery += ` WHERE Nom = ?`;
-  queryParams.push(nom);
+  updateQuery += ` WHERE ID = ?`;
+  queryParams.push(id);
 
   db.query(updateQuery, queryParams, (err, result) => {
     if (err) {
       return res.status(500).json({ message: "Database error", error: err });
     } else if (result.affectedRows === 0) {
-      return res.status(404).json({ message: "Plats not found" });
+      return res.status(404).json({ message: "Plat not found" });
     } else {
-      return res.status(200).json({ message: "Plats updated successfully" });
+      return res.status(200).json({ message: "Plat updated successfully" });
     }
   });
 };
 
 exports.deletePlats = (req, res) => {
-  const { nom } = req.body;
+  const { id } = req.body;
 
-  if (!nom) {
-    return res.status(400).json({ message: "Plats ID is required" });
+  if (!id) {
+    return res.status(400).json({ message: "Plat ID is required" });
   }
 
-  const deleteQuery = `DELETE FROM Plats WHERE Nom = ?`;
+  const deleteQuery = `DELETE FROM Plats WHERE ID = ?`;
 
-  db.query(deleteQuery, [nom], (err, result) => {
+  db.query(deleteQuery, [id], (err, result) => {
     if (err) {
       return res.status(500).json({ message: "Database error", error: err });
     } else if (result.affectedRows === 0) {
-      return res.status(404).json({ message: "Plats not found" });
+      return res.status(404).json({ message: "Plat not found" });
     } else {
-      return res.status(200).json({ message: "Plats deleted successfully" });
+      return res.status(200).json({ message: "Plat deleted successfully" });
     }
   });
 };
