@@ -3,10 +3,10 @@ const db = require("../../config/db.js");
 const dayjs = require('dayjs');
 
 exports.createMenu = (req, res) => {
-  const { menu, prix } = req.body;
+  const { menu, prix, plats } = req.body;
 
-  if (!(menu && prix)) {
-    return res.status(400).json({ message: "Menu and prix are required" });
+  if (!(menu && prix && plats)) {
+    return res.status(400).json({ message: "Menu, prix, and plats are required" });
   }
 
   const createMenuQuery = `
@@ -18,12 +18,29 @@ exports.createMenu = (req, res) => {
     if (err) {
       return res.status(500).json({ message: "Database error", error: err });
     } else {
-      return res.status(201).json({
-        message: "Menu created successfully",
+      const menuId = result.insertId; // Récupérer l'ID du menu nouvellement créé
+
+      // Insérer les associations plat-menu dans la table MenusPlats
+      const insertPlatsQuery = `
+        INSERT INTO MenusPlats (MenuID, PlatID) VALUES ?
+      `;
+
+      // Créer un tableau de valeurs pour l'insertion des associations plat-menu
+      const values = plats.map(platId => [menuId, platId]);
+
+      db.query(insertPlatsQuery, [values], (err, result) => {
+        if (err) {
+          return res.status(500).json({ message: "Database error", error: err });
+        } else {
+          return res.status(201).json({
+            message: "Menu created successfully",
+          });
+        }
       });
     }
   });
 };
+
 
 exports.getMenusWithPlats = (req, res) => {
   const getMenusWithPlatsQuery = `

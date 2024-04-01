@@ -51,15 +51,19 @@ exports.getFormuleDuJour = (req, res) => {
         acc.Menu = cur.Menu;
         acc.Prix = cur.Prix;
         acc.Plats = acc.Plats || [];
-        acc.Plats.push({
-          ID: cur.PlatID,
-          Nom: cur.Plat,
-          Prix: cur.PlatPrix,
-          Types: cur.Types
-        });
+        const platExiste = acc.Plats.some(plat => plat.ID === cur.PlatID);
+        if (!platExiste) { // Pour éviter les doublons
+          acc.Plats.push({
+            ID: cur.PlatID,
+            Nom: cur.Plat,
+            Prix: cur.PlatPrix,
+            Types: cur.Types
+          });
+        }
         return acc;
       }, {});
 
+      console.log(menu);
       return res.status(200).json(menu);
     }
   });
