@@ -77,9 +77,9 @@ exports.getMenusWithPlats = (req, res) => {
 };
 
 exports.updateMenu = (req, res) => {
-  const { id, newMenu, newPrix } = req.body;
+  const { id, newMenu, newPrix, plats } = req.body;
 
-  if (!(id && (newMenu || newPrix))) {
+  if (!(id && (newMenu || newPrix) && plats)) {
     return res.status(400).json({ message: "Missing data for update" });
   }
 
@@ -99,16 +99,52 @@ exports.updateMenu = (req, res) => {
   updateQuery += ` WHERE ID = ?`;
   queryParams.push(id);
 
-  db.query(updateQuery, queryParams, (err, result) => {
+  db.beginTransaction((err) => {
     if (err) {
-      return res.status(500).json({ message: "Database error", error: err });
-    } else if (result.affectedRows === 0) {
-      return res.status(404).json({ message: "Menu not found" });
-    } else {
-      return res.status(200).json({ message: "Menu updated successfully" });
+      return res.status(500).json({ message: "Transaction error", error: err });
     }
+
+    db.query(updateQuery, queryParams, (err, result) => {
+      if (err) {
+        return db.rollback(() => {
+          res.status(500).json({ message: "Database error", error: err });
+        });
+      } else if (result.affectedRows === 0) {
+        return res.status(404).json({ message: "Menu not found" });
+      }
+
+      // Supprimer les anciennes associations de plats
+      db.query("DELETE FROM MenusPlats WHERE MenuID = ?", [id], (err, result) => {
+        if (err) {
+          return db.rollback(() => {
+            res.status(500).json({ message: "Database error", error: err });
+          });
+        }
+
+        // Insérer les nouvelles associations de plats
+        const insertValues = plats.map((platID) => [id, platID]);
+        db.query("INSERT INTO MenusPlats (MenuID, PlatID) VALUES ?", [insertValues], (err, result) => {
+          if (err) {
+            return db.rollback(() => {
+              res.status(500).json({ message: "Database error", error: err });
+            });
+          }
+
+          db.commit((err) => {
+            if (err) {
+              return db.rollback(() => {
+                res.status(500).json({ message: "Transaction commit error", error: err });
+              });
+            }
+
+            return res.status(200).json({ message: "Menu updated successfully" });
+          });
+        });
+      });
+    });
   });
 };
+
 
 exports.deleteMenu = (req, res) => {
   const { id } = req.body;
