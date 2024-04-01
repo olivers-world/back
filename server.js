@@ -28,7 +28,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/reservation", reservationRoutes);
 app.use("/api/plat", platRoutes);
 app.use("/api/menu", menuRoutes);
-app.use("/api/formuleDuJour", formuleDuJourRoutes);
+app.use("/api/formule", formuleDuJourRoutes);
 app.use("/api/inventaire", inventaireRoutes);
 app.use("/api/nettoyage", nettoyageRoutes);
 app.use("/api/logout", logoutRoutes);
