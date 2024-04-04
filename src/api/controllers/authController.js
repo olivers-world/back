@@ -40,7 +40,7 @@ exports.register = (req, res) => {
         "INSERT INTO Utilisateurs (Nom, Prenom, Email, MotDePasse, Role) VALUES (?, ?, ?, ?, 'Utilisateur')";
       db.query(
         insertUserQuery,
-        [prenom, nom, email, hashedPwd],
+        [nom, prenom, email, hashedPwd],
         (err, result) => {
           if (err) throw err;
           res.status(201).json({ message: "User registered successfully" });
