@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 01, 2024 at 05:47 PM
+-- Generation Time: Apr 04, 2024 at 05:11 PM
 -- Server version: 11.3.2-MariaDB
 -- PHP Version: 8.3.4
 
@@ -88,6 +88,7 @@ CREATE TABLE `FormuleDuJour` (
 --
 
 INSERT INTO `FormuleDuJour` (`Date`, `MenuID`) VALUES
+('2024-04-04', 1),
 ('2024-04-01', 2);
 
 -- --------------------------------------------------------
@@ -239,7 +240,7 @@ INSERT INTO `Inventaires` (`ID`, `Date`, `Fait`) VALUES
 (1, '2024-03-06', 1),
 (2, '2024-03-20', 1),
 (4, '2024-04-10', 0),
-(52, '2024-04-05', 0);
+(54, '2024-04-04', 0);
 
 -- --------------------------------------------------------
 
@@ -260,8 +261,7 @@ CREATE TABLE `Menus` (
 INSERT INTO `Menus` (`ID`, `Menu`, `Prix`) VALUES
 (1, 'Classiques du Bistrot', 32.00),
 (2, 'Végétarien Gourmand', 20.00),
-(3, 'Voyage en Mer', 16.00),
-(4, 'Djej', 20.00);
+(3, 'Voyage en Mer', 16.00);
 
 -- --------------------------------------------------------
 
@@ -279,25 +279,33 @@ CREATE TABLE `MenusPlats` (
 --
 
 INSERT INTO `MenusPlats` (`MenuID`, `PlatID`) VALUES
-(2, 6),
-(2, 12),
-(2, 15),
-(2, 20),
-(2, 6),
-(2, 12),
-(2, 15),
-(2, 20),
+(1, 4),
+(1, 1),
+(1, 3),
+(1, 13),
+(1, 5),
+(1, 19),
+(1, 20),
 (3, 4),
 (3, 4),
+(3, 15),
+(3, 21),
+(3, 22),
 (3, 2),
 (3, 9),
 (3, 2),
 (3, 9),
 (3, 19),
 (3, 19),
-(1, 18),
-(1, 14),
-(1, 13);
+(3, 28),
+(3, 29),
+(2, 21),
+(2, 10),
+(2, 20),
+(2, 20),
+(2, 19),
+(2, 5),
+(2, 17);
 
 -- --------------------------------------------------------
 
@@ -320,8 +328,7 @@ INSERT INTO `Nettoyages` (`ID`, `Date`, `Fait`) VALUES
 (2, '2024-03-11', 1),
 (3, '2024-03-18', 1),
 (4, '2024-03-25', 1),
-(6, '2024-04-08', 0),
-(45, '2024-04-07', 0);
+(46, '2024-04-04', 0);
 
 -- --------------------------------------------------------
 
@@ -359,7 +366,23 @@ INSERT INTO `Plats` (`ID`, `Nom`, `Prix`, `Types`) VALUES
 (18, 'Spaghetti Carbonara', 15.00, 'Plats'),
 (19, 'Tarte Tatin', 9.00, 'Desserts'),
 (20, 'Tiramisu', 11.00, 'Desserts'),
-(21, 'Salade Nicoise', 20.00, 'Entrées');
+(21, 'Salade Nicoise', 20.00, 'Entrées'),
+(22, 'Carpaccio de boeuf', 14.00, 'Entrées'),
+(23, 'Tartare de saumon', 16.00, 'Entrées'),
+(24, 'Bruschetta', 8.00, 'Entrées'),
+(25, 'Escargots de Bourgogne', 13.00, 'Entrées'),
+(26, 'Panna cotta', 9.00, 'Desserts'),
+(27, 'Fondant au chocolat', 10.00, 'Desserts'),
+(28, 'Macarons assortis', 8.00, 'Desserts'),
+(29, 'Mousse au chocolat', 9.00, 'Desserts'),
+(30, 'Sorbet aux fruits de saison', 7.00, 'Desserts'),
+(31, 'Limonade maison', 5.00, 'Boissons'),
+(32, 'Jus de fruit fraits', 6.00, 'Boissons'),
+(33, 'Café gourmand', 8.00, 'Desserts'),
+(34, 'Thé glacé maison', 5.00, 'Boissons'),
+(35, 'Eau pétillante', 4.00, 'Boissons'),
+(36, 'Soda', 2.00, 'Boissons'),
+(37, 'Vin rouge', 12.00, 'Boissons');
 
 -- --------------------------------------------------------
 
@@ -501,14 +524,35 @@ CREATE TABLE `Reservations` (
 --
 
 INSERT INTO `Reservations` (`ID`, `Email`, `Nom`, `DateHeure`, `NbPersonnes`, `Statut`) VALUES
-(75, 'Djej', 'djej@djej.djej', '2024-03-30 12:00:00', 1, 'Prise'),
-(77, 'Djaj', 'djaj@djaj.djaj', '2024-03-30 12:05:00', 1, 'Prise'),
-(79, 'Djej', 'djaj@djaj.djaj', '2024-03-30 12:10:00', 1, 'Prise'),
-(80, 'dfdfdf', 'ddfdf', '2024-03-30 12:15:00', 1, 'Prise'),
-(82, 'aaaaa', 'jjjj', '2024-03-30 12:25:00', 1, 'Prise'),
-(91, 'djej@djej.djej', 'djejdj', '2024-04-11 12:00:00', 3, 'Prise'),
-(92, 'djej@djej.djej', 'DjejOO', '2024-03-31 18:00:00', 4, 'Prise'),
-(93, 'djej@djej.djej', 'Djej', '2024-04-01 12:00:00', 1, 'Prise');
+(97, 'garibaldialexis@gmail.com', 'GARIBALDI', '2024-04-05 12:00:00', 4, 'Prise'),
+(98, 'garibaldialexis@gmail.com', 'GARIBALDI', '2024-04-05 19:25:00', 3, 'Prise'),
+(99, 'garibaldialexis@gmail.com', 'GARIBALDI', '2024-04-04 12:00:00', 1, 'Prise'),
+(100, 'garibaldialexis@gmail.com', 'GARIBALDI', '2024-04-04 12:25:00', 1, 'Prise'),
+(101, 'garibaldialexis@gmail.com', 'GARIBALDI', '2024-04-04 12:10:00', 1, 'Prise'),
+(102, 'garibaldialexis@gmail.com', 'GARIBALDI', '2024-04-04 12:30:00', 1, 'Prise'),
+(103, 'garibaldialexis@gmail.com', 'GARIBALDI', '2024-04-04 12:50:00', 1, 'Prise'),
+(104, 'garibaldialexis@gmail.com', 'GARIBALDI', '2024-04-04 12:55:00', 1, 'Prise'),
+(105, 'garibaldialexis@gmail.com', 'GARIBALDI', '2024-04-03 12:00:00', 1, 'Prise'),
+(106, 'garibaldialexis@gmail.com', 'GARIBALDI', '2024-04-03 12:05:00', 1, 'Prise'),
+(107, 'garibaldialexis@gmail.com', 'GARIBALDI', '2024-04-03 12:10:00', 1, 'Prise'),
+(108, 'garibaldialexis@gmail.com', 'GARIBALDI', '2024-04-03 12:15:00', 1, 'Prise'),
+(109, 'garibaldialexis@gmail.com', 'GARIBALDI', '2024-04-03 12:20:00', 1, 'Prise'),
+(110, 'garibaldialexis@gmail.com', 'GARIBALDI', '2024-04-02 12:25:00', 1, 'Prise'),
+(111, 'garibaldialexis@gmail.com', 'GARIBALDI', '2024-04-02 12:35:00', 1, 'Prise'),
+(112, 'garibaldialexis@gmail.com', 'GARIBALDI', '2024-04-02 12:30:00', 1, 'Prise'),
+(113, 'garibaldialexis@gmail.com', 'GARIBALDI', '2024-04-02 12:10:00', 1, 'Prise'),
+(114, 'garibaldialexis@gmail.com', 'GARIBALDI', '2024-04-02 12:15:00', 1, 'Prise'),
+(115, 'garibaldialexis@gmail.com', 'GARIBALDI', '2024-04-02 12:55:00', 1, 'Prise'),
+(116, 'garibaldialexis@gmail.com', 'GARIBALDI', '2024-04-06 12:50:00', 1, 'Prise'),
+(117, 'garibaldialexis@gmail.com', 'GARIBALDI', '2024-04-06 12:45:00', 1, 'Prise'),
+(118, 'garibaldialexis@gmail.com', 'GARIBALDI', '2024-04-06 12:55:00', 1, 'Prise'),
+(119, 'garibaldialexis@gmail.com', 'GARIBALDI', '2024-04-06 12:35:00', 1, 'Prise'),
+(120, 'garibaldialexis@gmail.com', 'GARIBALDI', '2024-04-06 12:30:00', 1, 'Prise'),
+(121, 'adamcourtara@gmail.com', 'COURTARA', '2024-04-05 12:05:00', 3, 'Prise'),
+(122, 'adamcourtara@gmail.com', 'COURTARA', '2024-04-05 12:30:00', 3, 'Prise'),
+(123, 'mr.facebook@gmail.com', 'zuckerberg', '2024-04-05 12:20:00', 2, 'Prise'),
+(124, 'thelegendofzelda@gmail.com', 'Meriot', '2024-04-05 12:10:00', 2, 'Prise'),
+(125, 'djejounet@gmail.com', 'Nazim', '2024-04-05 12:15:00', 3, 'Prise');
 
 -- --------------------------------------------------------
 
@@ -678,7 +722,7 @@ CREATE TABLE `Utilisateurs` (
   `Email` varchar(255) NOT NULL,
   `MotDePasse` varchar(255) NOT NULL,
   `Role` varchar(255) DEFAULT NULL,
-  `refreshToken` text NOT NULL
+  `refreshToken` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -686,12 +730,10 @@ CREATE TABLE `Utilisateurs` (
 --
 
 INSERT INTO `Utilisateurs` (`Nom`, `Prenom`, `Email`, `MotDePasse`, `Role`, `refreshToken`) VALUES
-('Carlito', 'Carlito', 'carlito@carlito.carlito', '$2b$10$VicTb5Q5Ql7UPhhL285P3usj10M8tj5BtwW0LVdWxfyCt82QivQVO', 'Utilisateur', ''),
-('Djej', 'Djej', 'djej@djej.djej', '$2b$10$W0NBggrzZlGko6hBE1Q2te0QoGDt8oig5Rg.jEVPM6y7VSlioajzW', 'Administrateur', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRqZWpAZGplai5kamVqIiwicm9sZXMiOiJBZG1pbmlzdHJhdGV1ciIsImlhdCI6MTcxMTc2MDAwNSwiZXhwIjoxNzEyMzY0ODA1fQ.02sa5Pdmtx23ezATzxUCpVaqXu203M1wt14pVloPdg0'),
-('Terry', 'Davis', 'je.suis@schizophrene.aol', '$2b$10$LEOYpil6eJtjUfdRNa1Ae.ZNUBNfB.JzprQJSdL94QvEB6VY0CkN6', 'Utilisateur', ''),
-('Jesus', 'Christ', 'jesus@christ.fr', '$2b$10$6jtLIsz4Bt4nMTXHgeLI5ehCP34sHliBItvViwKrYrSLTnQFmQ/BC', 'Utilisateur', ''),
-('Mac', 'Fly', 'macfly@macfly.macfly', '$2b$10$AoZGjFosNQVZf4PfEFnL3O.rlD9w9v.8GSx2Ys409GRZOYWO.rLJS', 'Utilisateur', ''),
-('Zongo', 'Logo', 'Zongolo@logogo.go', '$2b$10$vJ2HKmcbg6EiAk8bdVceO.T2Hqq2jjwe9PlD4xWv2xHnRmzhBGDie', 'Utilisateur', '');
+('COURTARA', 'Adam', 'adamcourtara@gmail.com', '$2b$10$Ob9GBImg8BZo6ryd2pGFf.DHz/QwOi5DGeGSsyMbfVYaVBL1Wtn2O', 'Utilisateur', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkYW1jb3VydGFyYUBnbWFpbC5jb20iLCJyb2xlcyI6IlV0aWxpc2F0ZXVyIiwiaWF0IjoxNzEyMjQ4ODk5LCJleHAiOjE3MTI4NTM2OTl9.xCnGHS9AsAJIgQmK_ePL8-C7-9BVD1gsIAUEjsXoURw'),
+('GARIBALDI', 'Alexis', 'garibaldialexis@gmail.com', '$2b$10$OahGTmggffoF0Hl4s0YSQ.OioXjHn/meKjR1fmwU0Yc2YFRFLqs4u', 'Administrateur', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdhcmliYWxkaWFsZXhpc0BnbWFpbC5jb20iLCJyb2xlcyI6IkFkbWluaXN0cmF0ZXVyIiwiaWF0IjoxNzEyMjQ5MTA0LCJleHAiOjE3MTI4NTM5MDR9.SHxaSZ9PYQ-jelUmIgD__I5JAjcTbKiDjyyetBrjTus'),
+('zuckerberg', 'Mark', 'mr.facebook@gmail.com', '$2b$10$veqADWcz9SJlIWVlmwcd/.CfmWb.EuIcLskyejPe9FTDu41SftPWa', 'Utilisateur', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1yLmZhY2Vib29rQGdtYWlsLmNvbSIsInJvbGVzIjoiVXRpbGlzYXRldXIiLCJpYXQiOjE3MTIyNDg5NDksImV4cCI6MTcxMjg1Mzc0OX0.TTBmMtZxQfcfDTxzepHzqkdfA0-a3_SImqcXBu7HV2Q'),
+('Meriot', 'Matthieu', 'thelegendofzelda@gmail.com', '$2b$10$ad3cVCnJOlI9Pa0dCbQYiuslwhPcwOALjPFK/.HfTcvqB2L06Rh26', 'Utilisateur', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZWxlZ2VuZG9memVsZGFAZ21haWwuY29tIiwicm9sZXMiOiJVdGlsaXNhdGV1ciIsImlhdCI6MTcxMjI0ODk3MSwiZXhwIjoxNzEyODUzNzcxfQ.-mBlv5RV6zUzqAkFh8RFBYO-UJRdVsnwEQqsjKroVhM');
 
 -- --------------------------------------------------------
 
@@ -882,7 +924,7 @@ ALTER TABLE `Additions`
 -- AUTO_INCREMENT for table `Inventaires`
 --
 ALTER TABLE `Inventaires`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `Menus`
@@ -894,19 +936,19 @@ ALTER TABLE `Menus`
 -- AUTO_INCREMENT for table `Nettoyages`
 --
 ALTER TABLE `Nettoyages`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `Plats`
 --
 ALTER TABLE `Plats`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `Reservations`
 --
 ALTER TABLE `Reservations`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
 
 --
 -- AUTO_INCREMENT for table `Tables`
